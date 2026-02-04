@@ -10,8 +10,8 @@ import SwiftData
 
 struct ResultsView: View {
     
-    @State private var selectedPeriod = Periods.week
     @State private var isModalViewPresented = false
+    @State private var selectedPeriod = Periods.week
     @State private var selectedStatus = Statuses.all
     @State private var selectedCoupon: Coupon?
     

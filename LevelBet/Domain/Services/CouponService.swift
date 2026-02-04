@@ -8,6 +8,7 @@
 import SwiftData
 import Foundation
 
+@MainActor
 @Observable
 final class CouponService {
         
@@ -17,14 +18,14 @@ final class CouponService {
         self.context = context
     }
     
-    func addCoupon(stake: Decimal) {
-        let newCoupon = Coupon(timestamp: Date(), stake: stake)
+    func addCoupon(date: Date, stake: Decimal) {
+        let newCoupon = Coupon(timestamp: date, stake: stake)
         context.insert(newCoupon)
-        try! context.save()
+        try? context.save()
     }
     
     func delete(_ coupon: Coupon) {
         context.delete(coupon)
-        try! context.save()
+        try? context.save()
     }
 }

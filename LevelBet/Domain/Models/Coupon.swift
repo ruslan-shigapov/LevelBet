@@ -21,6 +21,11 @@ final class Coupon {
         events.reduce(1) { $0 * $1.odds }
     }
     
+    var totalStatus: Statuses {
+        // TODO: add status calculating somewhere 
+        .pending
+    }
+    
     init(timestamp: Date, stake: Decimal) {
         self.timestamp = timestamp
         self.stake = stake

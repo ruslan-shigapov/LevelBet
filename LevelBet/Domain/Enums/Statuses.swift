@@ -5,7 +5,7 @@
 //  Created by Ruslan Shigapov on 27.01.2026.
 //
 
-enum Statuses: String, CaseIterable, Identifiable {
+enum Statuses: String, Codable, CaseIterable, Identifiable {
     
     case all = "Все купоны"
     case pending = "Ожидаются"

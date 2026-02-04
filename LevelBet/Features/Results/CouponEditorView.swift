@@ -36,6 +36,7 @@ struct CouponEditorView: View {
                 DatePicker(
                     "Дата",
                     selection: $selectedDate,
+                    in: ...Date(),
                     displayedComponents: .date)
                 MainSection()
                 EventSection()
@@ -62,16 +63,17 @@ private extension CouponEditorView {
     
     func CancelButton() -> some View {
         ToolbarButton(type: .cancel) {
-            // TODO: add cancel logic
+            // TODO: add cancelation logic
             dismiss()
         }
     }
     
     func DoneButton() -> some View {
         ToolbarButton(type: .done) {
-            couponService.addCoupon(stake: 1000)
+            couponService.addCoupon(date: selectedDate, stake: 1000)
             dismiss()
         }
+        // TODO: add editing logic ?
     }
     
     func MainSection() -> some View {

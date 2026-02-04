@@ -43,7 +43,9 @@ struct CouponListView: View {
                                     allowsFullSwipe: false
                                 ) {
                                     Button(role: .destructive) {
-                                        couponService.delete(coupon)
+                                        withAnimation(.snappy) {
+                                            couponService.delete(coupon)
+                                        }
                                     } label: {
                                         Image(systemName: "trash")
                                     }
