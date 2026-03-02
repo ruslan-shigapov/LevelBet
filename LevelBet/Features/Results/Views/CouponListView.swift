@@ -15,6 +15,9 @@ struct CouponListView: View {
     @Query(sort: \Coupon.timestamp, order: .reverse)
     private var coupons: [Coupon]
     
+    @State var alertMessage: String?
+    @State var isAlertPresented = false
+
     private var uniqueDates: [Date] {
         Set(coupons.map { Calendar.current.startOfDay(for: $0.timestamp) })
             .sorted()
@@ -38,13 +41,10 @@ struct CouponListView: View {
                                 .onTapGesture {
                                     selectedCoupon = coupon
                                 }
-                                .swipeActions(
-                                    edge: .trailing,
-                                    allowsFullSwipe: false
-                                ) {
+                                .swipeActions(edge: .trailing) {
                                     Button(role: .destructive) {
                                         withAnimation(.snappy) {
-                                            couponService.delete(coupon)
+                                            delete(coupon)
                                         }
                                     } label: {
                                         Image(systemName: "trash")
@@ -58,12 +58,22 @@ struct CouponListView: View {
                     }
                 }
             }
+            .errorAlert(message: $alertMessage, isPresented: $isAlertPresented)
         }
     }
     
     private func getCoupons(by date: Date) -> [Coupon] {
         coupons.filter {
             Calendar.current.isDate($0.timestamp, inSameDayAs: date)
+        }
+    }
+    
+    private func delete(_ coupon: Coupon) {
+        do {
+            try couponService.delete(coupon)
+        } catch {
+            alertMessage = (error as? DataError)?.description
+            isAlertPresented = true
         }
     }
 }

@@ -8,28 +8,20 @@
 import SwiftUI
 import SwiftData
 
-// TODO: refactor with separate logic and UI consistence 
 struct CouponView: View {
     
     let coupon: Coupon
     
     var body: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: Layouts.mediumOffset) {
             HStack {
-                Text("Ординар")
-                    .font(.footnote.bold())
-                    .padding(.vertical, 4)
-                    .padding(.horizontal, 10)
-                    .background(.blue)
-                    .clipShape(Capsule())
+                TypeText()
                 Spacer()
-                Image(systemName: coupon.totalStatus.imageName)
-                    .font(.title3)
-                    .foregroundStyle(coupon.totalStatus.color)
+                StatusImage()
             }
             HStack {
-                Text(coupon.stake.description)
-                Text("x 2,00")
+                Text(coupon.stake.formatted())
+                Text("x ")
                     .foregroundStyle(.blue)
                 Spacer()
                 Text("2000")
@@ -37,6 +29,23 @@ struct CouponView: View {
             }
         }
         .contentShape(.rect)
+    }
+}
+
+private extension CouponView {
+    
+    func TypeText() -> some View {
+        Text(coupon.events.count == 1 ? "Одинар" : "Экспресс")
+            .font(.footnote.bold())
+            .padding(.vertical, Layouts.tinyOffset)
+            .padding(.horizontal, Layouts.smallOffset)
+            .background(Capsule().fill(Color.accentColor))
+    }
+    
+    func StatusImage() -> some View {
+        Image(systemName: coupon.totalStatus.imageName)
+            .font(.title3)
+            .foregroundStyle(coupon.totalStatus.color)
     }
 }
 

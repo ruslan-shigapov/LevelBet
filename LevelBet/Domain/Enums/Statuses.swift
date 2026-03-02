@@ -12,5 +12,14 @@ enum Statuses: String, Codable, CaseIterable, Identifiable {
     case won = "Выиграные"
     case lost = "Проиграные"
     
+    var imageName: String {
+        switch self {
+        case .all: "circle"
+        case .pending: "clock"
+        case .won: "checkmark.circle"
+        case .lost: "xmark.circle"
+        }
+    }
+    
     var id: Self { self }
 }

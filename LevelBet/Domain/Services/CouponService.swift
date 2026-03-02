@@ -8,6 +8,18 @@
 import SwiftData
 import Foundation
 
+enum DataError: Error {
+    case createFailure, updateFailure, deleteFailure
+    
+    var description: String {
+        switch self {
+        case .createFailure: "Не удалось создать купон."
+        case .updateFailure: "Не удалось изменить купон."
+        case .deleteFailure: "Не удалось удалить купон."
+        }
+    }
+}
+
 @MainActor
 @Observable
 final class CouponService {
@@ -18,14 +30,52 @@ final class CouponService {
         self.context = context
     }
     
-    func addCoupon(date: Date, stake: Decimal) {
-        let newCoupon = Coupon(timestamp: date, stake: stake)
-        context.insert(newCoupon)
-        try? context.save()
+    func createCoupon(
+        date: Date,
+        stake: String,
+        events: [Event],
+        totalStatus: Statuses
+    ) throws {
+        let coupon = Coupon(
+            timestamp: date,
+            stake: Int(stake.replacingOccurrences(of: " ", with: "")) ?? 0,
+            totalStatus: totalStatus)
+        coupon.events = events
+        events.forEach { $0.coupon = coupon }
+        context.insert(coupon)
+        do {
+            try context.save()
+        } catch {
+            throw DataError.createFailure
+        }
     }
     
-    func delete(_ coupon: Coupon) {
+    func update(
+        _ coupon: Coupon,
+        date: Date,
+        stake: String,
+        events: [Event],
+        totalStatus: Statuses
+    ) throws {
+        coupon.timestamp = date
+        coupon.stake = Int(stake.replacingOccurrences(of: " ", with: "")) ?? 0
+        coupon.totalStatus = totalStatus
+        coupon.events.forEach { $0.coupon = nil }
+        coupon.events = events
+        events.forEach { $0.coupon = coupon }
+        do {
+            try context.save()
+        } catch {
+            throw DataError.updateFailure
+        }
+    }
+    
+    func delete(_ coupon: Coupon) throws {
         context.delete(coupon)
-        try? context.save()
+        do {
+            try context.save()
+        } catch {
+            throw DataError.deleteFailure
+        }
     }
 }

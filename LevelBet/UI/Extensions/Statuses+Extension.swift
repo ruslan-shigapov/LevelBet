@@ -17,13 +17,4 @@ extension Statuses {
         case .lost: .pink
         }
     }
-    
-    var imageName: String {
-        switch self {
-        case .all: "circle"
-        case .pending: "clock"
-        case .won: "checkmark.circle"
-        case .lost: "xmark.circle"
-        }
-    }
 }

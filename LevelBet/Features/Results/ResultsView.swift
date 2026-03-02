@@ -10,8 +10,8 @@ import SwiftData
 
 struct ResultsView: View {
     
-    @State private var isModalViewPresented = false
     @State private var selectedPeriod = Periods.week
+    @State private var isModalViewPresented = false
     @State private var selectedStatus = Statuses.all
     @State private var selectedCoupon: Coupon?
     
@@ -21,7 +21,7 @@ struct ResultsView: View {
             EditButton()
         }
         ToolbarItemGroup {
-            FilterMenu()
+            FilterMenu(selectedPeriod: $selectedPeriod)
             ToolbarButton(type: .add) {
                 isModalViewPresented = true
             }
@@ -33,6 +33,7 @@ struct ResultsView: View {
             StatusBarView(selectedStatus: $selectedStatus)
             CouponListView(selectedCoupon: $selectedCoupon)
         }
+        .background(Color.lightMidnight)
         .toolbarTitleDisplayMode(.inline)
         .toolbar { toolbarContent }
         .fullScreenCover(isPresented: $isModalViewPresented) {
@@ -40,29 +41,6 @@ struct ResultsView: View {
         }
         .fullScreenCover(item: $selectedCoupon) {
             CouponEditorView(coupon: $0)
-        }
-    }
-}
-
-private extension ResultsView {
-    
-    func FilterMenu() -> some View {
-        Menu {
-            Text("Период:")
-            Divider()
-            ForEach(Periods.allCases) { period in
-                Button {
-                    selectedPeriod = period
-                } label: {
-                    if selectedPeriod == period {
-                        Label(period.rawValue, systemImage: "checkmark")
-                    } else {
-                        Text(period.rawValue)
-                    }
-                }
-            }
-        } label: {
-            Image(systemName: "line.3.horizontal.decrease")
         }
     }
 }

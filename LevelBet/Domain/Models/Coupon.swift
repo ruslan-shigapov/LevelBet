@@ -12,22 +12,15 @@ import SwiftData
 final class Coupon {
     
     var timestamp: Date
-    var stake: Decimal
+    var stake: Int
+    var totalStatus: Statuses
     
     @Relationship(deleteRule: .cascade)
     var events: [Event] = []
     
-    var totalOdds: Decimal {
-        events.reduce(1) { $0 * $1.odds }
-    }
-    
-    var totalStatus: Statuses {
-        // TODO: add status calculating somewhere 
-        .pending
-    }
-    
-    init(timestamp: Date, stake: Decimal) {
+    init(timestamp: Date, stake: Int, totalStatus: Statuses) {
         self.timestamp = timestamp
         self.stake = stake
+        self.totalStatus = totalStatus
     }
 }

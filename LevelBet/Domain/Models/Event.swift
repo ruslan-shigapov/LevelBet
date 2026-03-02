@@ -12,19 +12,17 @@ import Foundation
 final class Event {
     
     var sport: Sports
-    var odds: Decimal
+    var odds: Double
     var status: Statuses
     var coupon: Coupon?
     
     init(
         sport: Sports,
-        odds: Decimal,
+        odds: Double,
         status: Statuses = .pending,
-        coupon: Coupon?
     ) {
         self.sport = sport
         self.odds = odds
         self.status = status
-        self.coupon = coupon
     }
 }
