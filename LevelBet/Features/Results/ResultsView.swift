@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct ResultsView: View {
-    
+        
     @State private var selectedPeriod = Periods.week
     @State private var isModalViewPresented = false
     @State private var selectedStatus = Statuses.all
@@ -31,7 +31,10 @@ struct ResultsView: View {
     var body: some View {
         VStack {
             StatusBarView(selectedStatus: $selectedStatus)
-            CouponListView(selectedCoupon: $selectedCoupon)
+            CouponListView(
+                selectedPeriod: selectedPeriod,
+                selectedStatus: selectedStatus,
+                selectedCoupon: $selectedCoupon)
         }
         .background(Color.lightMidnight)
         .toolbarTitleDisplayMode(.inline)

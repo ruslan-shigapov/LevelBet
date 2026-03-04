@@ -25,6 +25,9 @@ struct StatusBarView: View {
         .padding(.horizontal)
         .padding(.top, Layouts.smallOffset)
     }
+}
+
+private extension StatusBarView {
     
     func ResizableButton(status: Statuses) -> some View {
         HStack {
@@ -33,8 +36,7 @@ struct StatusBarView: View {
                 .symbolVariant(selectedStatus == status ? .fill : .none)
             if selectedStatus == status {
                 Text(status.rawValue)
-                    .font(.callout)
-                    .fontWeight(.semibold)
+                    .font(.callout.weight(.semibold))
                     .lineLimit(1)
             }
         }

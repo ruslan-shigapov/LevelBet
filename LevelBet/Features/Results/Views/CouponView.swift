@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct CouponView: View {
+    
+    private var formattedOdds: String {
+        coupon.totalOdds.formatted(.number.precision(.fractionLength(0...2)))
+    }
     
     let coupon: Coupon
     
@@ -19,14 +22,7 @@ struct CouponView: View {
                 Spacer()
                 StatusImage()
             }
-            HStack {
-                Text(coupon.stake.formatted())
-                Text("x ")
-                    .foregroundStyle(.blue)
-                Spacer()
-                Text("2000")
-                    .foregroundStyle(coupon.totalStatus.color)
-            }
+            SummaryStack()
         }
         .contentShape(.rect)
     }
@@ -36,7 +32,7 @@ private extension CouponView {
     
     func TypeText() -> some View {
         Text(coupon.events.count == 1 ? "Одинар" : "Экспресс")
-            .font(.footnote.bold())
+            .font(.footnote.weight(.semibold))
             .padding(.vertical, Layouts.tinyOffset)
             .padding(.horizontal, Layouts.smallOffset)
             .background(Capsule().fill(Color.accentColor))
@@ -47,11 +43,17 @@ private extension CouponView {
             .font(.title3)
             .foregroundStyle(coupon.totalStatus.color)
     }
-}
-
-#Preview {
-    let container = try! ModelContainer(for: Coupon.self, Event.self)
-    ContentView()
-        .modelContainer(container)
-        .environment(CouponService(context: container.mainContext))
+    
+    func SummaryStack() -> some View {
+        HStack {
+            Text(coupon.stake.formatted())
+            Text("x \(formattedOdds)")
+                .foregroundStyle(.blue)
+            Spacer()
+            Text(coupon.winnings.formatted())
+                .foregroundStyle(coupon.totalStatus.color)
+        }
+        .font(.callout)
+        .monospaced()
+    }
 }

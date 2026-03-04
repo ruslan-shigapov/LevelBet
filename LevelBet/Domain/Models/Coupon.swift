@@ -18,6 +18,14 @@ final class Coupon {
     @Relationship(deleteRule: .cascade)
     var events: [Event] = []
     
+    var totalOdds: Double {
+        events.reduce(1) { $0 * $1.odds }
+    }
+    
+    var winnings: Int {
+        totalStatus == .lost ? 0 : Int(Double(stake) * totalOdds)
+    }
+    
     init(timestamp: Date, stake: Int, totalStatus: Statuses) {
         self.timestamp = timestamp
         self.stake = stake

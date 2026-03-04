@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		E41F1B192F518CE7003F90B8 /* Layouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41F1B182F518CE7003F90B8 /* Layouts.swift */; };
-		E41F1B1B2F518DAF003F90B8 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41F1B1A2F518DAF003F90B8 /* Fonts.swift */; };
 		E41F1B1F2F51ADA1003F90B8 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41F1B1E2F51ADA1003F90B8 /* View+Extension.swift */; };
 		E44F95802F4EFAC8001B9E72 /* EventSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44F957F2F4EFAC8001B9E72 /* EventSectionView.swift */; };
 		E44F95842F4F03C0001B9E72 /* MainSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44F95832F4F03C0001B9E72 /* MainSectionView.swift */; };
+		E48AE6292F58364B00E5E80E /* FilterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48AE6282F58364B00E5E80E /* FilterFactory.swift */; };
 		E49F88A42F28BB0F002F0C6B /* CouponService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49F88A32F28BB0F002F0C6B /* CouponService.swift */; };
 		E49F88A72F28BBA8002F0C6B /* Statuses.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49F88A62F28BBA8002F0C6B /* Statuses.swift */; };
 		E49F88A92F28BBBD002F0C6B /* Periods.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49F88A82F28BBBD002F0C6B /* Periods.swift */; };
@@ -37,10 +37,10 @@
 
 /* Begin PBXFileReference section */
 		E41F1B182F518CE7003F90B8 /* Layouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layouts.swift; sourceTree = "<group>"; };
-		E41F1B1A2F518DAF003F90B8 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		E41F1B1E2F51ADA1003F90B8 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		E44F957F2F4EFAC8001B9E72 /* EventSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSectionView.swift; sourceTree = "<group>"; };
 		E44F95832F4F03C0001B9E72 /* MainSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSectionView.swift; sourceTree = "<group>"; };
+		E48AE6282F58364B00E5E80E /* FilterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterFactory.swift; sourceTree = "<group>"; };
 		E49F88A32F28BB0F002F0C6B /* CouponService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponService.swift; sourceTree = "<group>"; };
 		E49F88A62F28BBA8002F0C6B /* Statuses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statuses.swift; sourceTree = "<group>"; };
 		E49F88A82F28BBBD002F0C6B /* Periods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Periods.swift; sourceTree = "<group>"; };
@@ -80,9 +80,16 @@
 			isa = PBXGroup;
 			children = (
 				E41F1B182F518CE7003F90B8 /* Layouts.swift */,
-				E41F1B1A2F518DAF003F90B8 /* Fonts.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		E48AE6272F58363000E5E80E /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				E48AE6282F58364B00E5E80E /* FilterFactory.swift */,
+			);
+			path = Factories;
 			sourceTree = "<group>";
 		};
 		E49F88A52F28BB34002F0C6B /* Services */ = {
@@ -204,6 +211,7 @@
 				E4F9856B2F1E2519001CB75F /* Models */,
 				E4A8F3742F2785A00084311F /* Enums */,
 				E49F88A52F28BB34002F0C6B /* Services */,
+				E48AE6272F58363000E5E80E /* Factories */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -338,6 +346,7 @@
 				E4F985732F1E2592001CB75F /* StatisticsView.swift in Sources */,
 				E4A8F3762F2785AD0084311F /* Sports.swift in Sources */,
 				E44F95802F4EFAC8001B9E72 /* EventSectionView.swift in Sources */,
+				E48AE6292F58364B00E5E80E /* FilterFactory.swift in Sources */,
 				E4F985712F1E2587001CB75F /* ResultsView.swift in Sources */,
 				E4F985662F1E24FE001CB75F /* Coupon.swift in Sources */,
 				E41F1B1F2F51ADA1003F90B8 /* View+Extension.swift in Sources */,
@@ -350,7 +359,6 @@
 				E44F95842F4F03C0001B9E72 /* MainSectionView.swift in Sources */,
 				E49F88AE2F28BD45002F0C6B /* Statuses+Extension.swift in Sources */,
 				E4A8F3732F2785740084311F /* Event.swift in Sources */,
-				E41F1B1B2F518DAF003F90B8 /* Fonts.swift in Sources */,
 				E49F88A72F28BBA8002F0C6B /* Statuses.swift in Sources */,
 				E49F88A42F28BB0F002F0C6B /* CouponService.swift in Sources */,
 				E4F24B9C2F4DA6B300DC2252 /* AddEventView.swift in Sources */,

@@ -26,6 +26,9 @@ struct MainSectionView: View {
             LabeledTotalOdds()
             LabeledWinnings()
         }
+        .onAppear {
+            stake = formatWithSpaces(stake)
+        }
     }
     
     private func sanitize(input: String) -> String {
@@ -54,6 +57,7 @@ private extension MainSectionView {
                 DoneButton()
                     .opacity(isFocused && isValid ? 1 : 0)
                 TextField("0", text: $stake)
+                    .monospaced()
                     .keyboardType(.numberPad)
                     .multilineTextAlignment(.trailing)
                     .focused($isFocused)
@@ -72,7 +76,7 @@ private extension MainSectionView {
             isFocused = false
         } label: {
             Text("Готово")
-                .font(.footnote.weight(.medium))
+                .font(.footnote.weight(.semibold))
                 .padding(.horizontal, Layouts.smallOffset)
                 .padding(.vertical, Layouts.tinyOffset)
         }
@@ -85,6 +89,7 @@ private extension MainSectionView {
             Text(
                 totalOdds.formatted(
                     .number.precision(.fractionLength(0...2))))
+            .monospaced()
             .frame(width: 140, alignment: .trailing)
             .lineLimit(1)
         }
@@ -98,6 +103,7 @@ private extension MainSectionView {
                 totalStatus != .lost ?
                 Int(calculateWinnings()).formatted()
                 : "0")
+            .monospaced()
             .frame(width: 140, alignment: .trailing)
             .lineLimit(1)
         }

@@ -107,6 +107,7 @@ private extension AddEventView {
     func LabeledTextField() -> some View {
         LabeledContent {
             TextField("0", text: $odds)
+                .monospaced()
                 .keyboardType(.decimalPad)
                 .multilineTextAlignment(.trailing)
                 .focused($isFocused)

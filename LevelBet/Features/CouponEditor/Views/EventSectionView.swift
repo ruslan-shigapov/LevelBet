@@ -39,7 +39,9 @@ private extension EventSectionView {
                     StatusPicker($event.status)
                     LabeledContent(event.sport.rawValue) {
                         Text(event.odds.formatted())
+                            .monospaced()
                     }
+                    .foregroundStyle(.secondary)
                 }
                 .swipeActions(edge: .trailing) {
                     DeleteSwipeButton {

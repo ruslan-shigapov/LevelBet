@@ -15,23 +15,31 @@ struct CouponListView: View {
     @Query(sort: \Coupon.timestamp, order: .reverse)
     private var coupons: [Coupon]
     
-    @State var alertMessage: String?
-    @State var isAlertPresented = false
+    @State private var alertMessage: String?
+    @State private var isAlertPresented = false
 
+    private var filtered: [Coupon] {
+        coupons.filter {
+            FilterFactory.matches(
+                coupon: $0,
+                period: selectedPeriod,
+                status: selectedStatus)
+        }
+    }
+    
     private var uniqueDates: [Date] {
-        Set(coupons.map { Calendar.current.startOfDay(for: $0.timestamp) })
+        Set(filtered.map { Calendar.current.startOfDay(for: $0.timestamp) })
             .sorted()
     }
+    
+    let selectedPeriod: Periods
+    let selectedStatus: Statuses
     
     @Binding var selectedCoupon: Coupon?
     
     var body: some View {
-        if coupons.isEmpty {
-            ContentUnavailableView(
-                "Нет купонов",
-                systemImage: "ticket",
-                description: Text(
-                    "Чтобы добавить новый, коснись кнопки с плюсом выше."))
+        if filtered.isEmpty {
+            EmptyState()
         } else {
             List {
                 ForEach(uniqueDates, id: \.self) { date in
@@ -63,7 +71,7 @@ struct CouponListView: View {
     }
     
     private func getCoupons(by date: Date) -> [Coupon] {
-        coupons.filter {
+        filtered.filter {
             Calendar.current.isDate($0.timestamp, inSameDayAs: date)
         }
     }
@@ -74,6 +82,24 @@ struct CouponListView: View {
         } catch {
             alertMessage = (error as? DataError)?.description
             isAlertPresented = true
+        }
+    }
+}
+
+private extension CouponListView {
+    
+    func EmptyState() -> some View {
+        ContentUnavailableView {
+            Label {
+                Text("Нет купонов")
+            } icon: {
+                Image(systemName: "ticket")
+            }
+        } description: {
+            Text(
+                coupons.isEmpty
+                ? "Чтобы добавить новый, коснись кнопки с плюсом выше."
+                : "Попробуй выбрать другой период или статус.")
         }
     }
 }

@@ -57,7 +57,9 @@ final class CouponService {
         events: [Event],
         totalStatus: Statuses
     ) throws {
-        coupon.timestamp = date
+        coupon.timestamp = merge(
+            newDate: date,
+            keepingTimeFrom: coupon.timestamp)
         coupon.stake = Int(stake.replacingOccurrences(of: " ", with: "")) ?? 0
         coupon.totalStatus = totalStatus
         coupon.events.forEach { $0.coupon = nil }
@@ -77,5 +79,18 @@ final class CouponService {
         } catch {
             throw DataError.deleteFailure
         }
+    }
+    
+    private func merge(newDate: Date, keepingTimeFrom oldDate: Date) -> Date {
+        let calendar = Calendar.current
+        let time = calendar.dateComponents(
+            [.hour, .minute, .second],
+            from: oldDate)
+        let date = calendar.date(
+            bySettingHour: time.hour ?? 0,
+            minute: time.minute ?? 0,
+            second: time.second ?? 0,
+            of: newDate)
+        return date ?? newDate
     }
 }
