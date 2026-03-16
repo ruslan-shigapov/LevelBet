@@ -67,7 +67,7 @@ private extension EventSectionView {
     
     func SectionHeader() -> some View {
         LabeledContent("События", value: String(events.count))
-            .font(.subheadline.weight(.semibold))
+            .fontWeight(.semibold)
     }
     
     func SectionFooter() -> some View {

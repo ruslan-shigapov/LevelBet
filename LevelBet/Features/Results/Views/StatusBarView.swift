@@ -17,12 +17,14 @@ struct StatusBarView: View {
                 ResizableButton(status: $0)
             }
             if selectedStatus == .all {
-                ResizableButton(status: .all)
-                    .transition(.offset(x: 200))
             }
+            ResizableButton(status: .all)
+                .frame(width: selectedStatus == .all ? nil : 0)
+                .opacity(selectedStatus == .all ? 1 : 0)
+                .scaleEffect(selectedStatus == .all ? 1 : 0.9)
+                .allowsHitTesting(selectedStatus == .all)
         }
         .frame(height: 50)
-        .padding(.horizontal)
         .padding(.top, Layouts.smallOffset)
     }
 }
@@ -45,16 +47,13 @@ private extension StatusBarView {
             maxWidth: selectedStatus == status ? .infinity : nil,
             maxHeight: .infinity)
         .padding(.horizontal)
-        .background(
-            Rectangle()
-                .fill(selectedStatus == status ? status.color : .secondary))
-        .clipShape(
-            .rect(cornerRadius: Layouts.cornerRadius, style: .continuous))
+        .background(selectedStatus == status ? status.color : .secondary)
+        .clipShape(.capsule)
         .onTapGesture {
             guard status != .all else { return }
             let generator = UIImpactFeedbackGenerator(style: .light)
             generator.impactOccurred()
-            withAnimation(.bouncy) {
+            withAnimation(.snappy) {
                 if selectedStatus == status {
                     selectedStatus = .all
                 } else {

@@ -12,7 +12,7 @@ struct FilterFactory {
     static func matches(
         coupon: Coupon,
         period: Periods,
-        status: Statuses
+        status: Statuses? = nil
     ) -> Bool {
         let calendar = Calendar.current
         let startDate: Date? = {
@@ -26,8 +26,12 @@ struct FilterFactory {
             }
         }()
         guard let startDate else { return false }
-        let matchesDate = coupon.timestamp >= startDate
-        let matchesStatus = status == .all || coupon.totalStatus == status
-        return matchesDate && matchesStatus
+        let matchesStatus: Bool
+        if let status {
+            matchesStatus = status == .all || coupon.totalStatus == status
+        } else {
+            matchesStatus = coupon.totalStatus != .pending
+        }
+        return coupon.timestamp >= startDate && matchesStatus
     }
 }

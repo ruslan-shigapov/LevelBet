@@ -9,11 +9,23 @@ import SwiftUI
 
 struct CouponView: View {
     
-    private var formattedOdds: String {
-        coupon.totalOdds.formatted(.number.precision(.fractionLength(0...2)))
-    }
+    private let eventsCount: Int
+    private let totalStatus: Statuses
+    private let stake: String
+    private let totalOdds: String
+    private let winnings: String
     
     let coupon: Coupon
+    
+    init(coupon: Coupon) {
+        self.coupon = coupon
+        totalOdds = coupon.totalOdds
+            .formatted(.number.precision(.fractionLength(0...2)))
+        eventsCount = coupon.events.count
+        totalStatus = coupon.totalStatus
+        stake = coupon.stake.formatted()
+        winnings = coupon.winnings.formatted()
+    }
     
     var body: some View {
         VStack(spacing: Layouts.mediumOffset) {
@@ -31,7 +43,7 @@ struct CouponView: View {
 private extension CouponView {
     
     func TypeText() -> some View {
-        Text(coupon.events.count == 1 ? "Одинар" : "Экспресс")
+        Text(eventsCount == 1 ? "Одинар" : "Экспресс")
             .font(.footnote.weight(.semibold))
             .padding(.vertical, Layouts.tinyOffset)
             .padding(.horizontal, Layouts.smallOffset)
@@ -39,19 +51,19 @@ private extension CouponView {
     }
     
     func StatusImage() -> some View {
-        Image(systemName: coupon.totalStatus.imageName)
+        Image(systemName: totalStatus.imageName)
             .font(.title3)
-            .foregroundStyle(coupon.totalStatus.color)
+            .foregroundStyle(totalStatus.color)
     }
     
     func SummaryStack() -> some View {
         HStack {
-            Text(coupon.stake.formatted())
-            Text("x \(formattedOdds)")
+            Text(stake)
+            Text("x \(totalOdds)")
                 .foregroundStyle(.blue)
             Spacer()
-            Text(coupon.winnings.formatted())
-                .foregroundStyle(coupon.totalStatus.color)
+            Text(winnings)
+                .foregroundStyle(totalStatus.color)
         }
         .font(.callout)
         .monospaced()

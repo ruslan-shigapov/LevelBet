@@ -12,5 +12,4 @@ enum Layouts {
     static let smallOffset: CGFloat = 8
     static let mediumOffset: CGFloat = 12
     static let standardOffset: CGFloat = 16
-    static let cornerRadius: CGFloat = 20
 }

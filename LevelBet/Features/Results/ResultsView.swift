@@ -6,22 +6,19 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct ResultsView: View {
         
     @State private var selectedPeriod = Periods.week
     @State private var isModalViewPresented = false
-    @State private var selectedStatus = Statuses.all
     @State private var selectedCoupon: Coupon?
     
     @ToolbarContentBuilder
     private var toolbarContent: some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
-            EditButton()
-        }
-        ToolbarItemGroup {
             FilterMenu(selectedPeriod: $selectedPeriod)
+        }
+        ToolbarItem {
             ToolbarButton(type: .add) {
                 isModalViewPresented = true
             }
@@ -29,15 +26,10 @@ struct ResultsView: View {
     }
 
     var body: some View {
-        VStack {
-            StatusBarView(selectedStatus: $selectedStatus)
-            CouponListView(
-                selectedPeriod: selectedPeriod,
-                selectedStatus: selectedStatus,
-                selectedCoupon: $selectedCoupon)
-        }
+        CouponListView(
+            selectedPeriod: selectedPeriod,
+            selectedCoupon: $selectedCoupon)
         .background(Color.lightMidnight)
-        .toolbarTitleDisplayMode(.inline)
         .toolbar { toolbarContent }
         .fullScreenCover(isPresented: $isModalViewPresented) {
             CouponEditorView()
@@ -46,11 +38,4 @@ struct ResultsView: View {
             CouponEditorView(coupon: $0)
         }
     }
-}
-
-#Preview {
-    let container = try! ModelContainer(for: Coupon.self, Event.self)
-    ContentView()
-        .modelContainer(container)
-        .environment(CouponService(context: container.mainContext))
 }

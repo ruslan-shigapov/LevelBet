@@ -35,8 +35,10 @@ private enum Tabs: String, CaseIterable, Identifiable {
 
 struct ContentView: View {
 
+    @State private var selectedTab: Tabs = .statistics
+    
     var body: some View {
-        TabView {
+        TabView(selection: $selectedTab) {
             ForEach(Tabs.allCases) { tab in
                 NavigationStack {
                     tab.view

@@ -10,11 +10,13 @@ import SwiftData
 
 struct CouponListView: View {
     
+    // MARK: Private Properties
     @Environment(CouponService.self) private var couponService
     
     @Query(sort: \Coupon.timestamp, order: .reverse)
     private var coupons: [Coupon]
     
+    @State private var selectedStatus = Statuses.all
     @State private var alertMessage: String?
     @State private var isAlertPresented = false
 
@@ -27,55 +29,54 @@ struct CouponListView: View {
         }
     }
     
-    private var uniqueDates: [Date] {
-        Set(filtered.map { Calendar.current.startOfDay(for: $0.timestamp) })
-            .sorted()
+    private var grouped: [Date: [Coupon]] {
+        Dictionary(grouping: filtered) {
+            Calendar.current.startOfDay(for: $0.timestamp)
+        }
     }
     
+    private var sortedDates: [Date] {
+        grouped.keys.sorted(by: >)
+    }
+    
+    // MARK: Public Properties
     let selectedPeriod: Periods
-    let selectedStatus: Statuses
     
     @Binding var selectedCoupon: Coupon?
     
+    // MARK: Body
     var body: some View {
-        if filtered.isEmpty {
-            EmptyState()
-        } else {
-            List {
-                ForEach(uniqueDates, id: \.self) { date in
-                    Section {
-                        ForEach(getCoupons(by: date)) { coupon in
-                            CouponView(coupon: coupon)
-                                .onTapGesture {
-                                    selectedCoupon = coupon
+        List {
+            StatusBarView(selectedStatus: $selectedStatus)
+                .listRowInsets(.init())
+                .listRowBackground(Color.clear)
+            ForEach(sortedDates, id: \.self) { date in
+                Section {
+                    ForEach(grouped[date] ?? []) { coupon in
+                        CouponView(coupon: coupon)
+                            .onTapGesture {
+                                selectedCoupon = coupon
+                            }
+                            .swipeActions(edge: .trailing) {
+                                DeleteSwipeButton {
+                                    delete(coupon)
                                 }
-                                .swipeActions(edge: .trailing) {
-                                    Button(role: .destructive) {
-                                        withAnimation(.snappy) {
-                                            delete(coupon)
-                                        }
-                                    } label: {
-                                        Image(systemName: "trash")
-                                    }
-                                }
-                        }
-                    } header: {
-                        Text(
-                            date,
-                            format: .dateTime.weekday(.wide).day().month())
+                            }
                     }
+                } header: {
+                    SectionHeader(for: date, coupons: grouped[date] ?? [])
                 }
             }
-            .errorAlert(message: $alertMessage, isPresented: $isAlertPresented)
         }
+        .overlay(alignment: .center) {
+            if filtered.isEmpty {
+                EmptyState()
+            }
+        }
+        .errorAlert(message: $alertMessage, isPresented: $isAlertPresented)
     }
     
-    private func getCoupons(by date: Date) -> [Coupon] {
-        filtered.filter {
-            Calendar.current.isDate($0.timestamp, inSameDayAs: date)
-        }
-    }
-    
+    // MARK: Private Methods
     private func delete(_ coupon: Coupon) {
         do {
             try couponService.delete(coupon)
@@ -84,9 +85,29 @@ struct CouponListView: View {
             isAlertPresented = true
         }
     }
+    
+    private func formatProfit(_ profit: Int) -> String {
+        profit.formatted(.number.sign(strategy: .always()))
+    }
 }
 
+// MARK: - Views
 private extension CouponListView {
+    
+    func SectionHeader(for date: Date, coupons: [Coupon]) -> some View {
+        LabeledContent {
+            ProfitText(MetricFactory.profit(for: coupons))
+        } label: {
+            Text(date, format: .dateTime.weekday(.wide).day().month())
+        }
+        .fontWeight(.semibold)
+    }
+    
+    func ProfitText(_ profit: Int) -> some View {
+        Text(profit.formatted(.number.sign(strategy: .automatic)))
+            .foregroundStyle(
+                profit < 0 ? .red : profit > 0 ? .green : .secondary)
+    }
     
     func EmptyState() -> some View {
         ContentUnavailableView {
