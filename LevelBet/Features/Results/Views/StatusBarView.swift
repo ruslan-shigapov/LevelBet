@@ -19,7 +19,7 @@ struct StatusBarView: View {
             if selectedStatus == .all {
             }
             ResizableButton(status: .all)
-                .frame(width: selectedStatus == .all ? nil : 0)
+                .frame(width: selectedStatus == .all ? .infinity : 0)
                 .opacity(selectedStatus == .all ? 1 : 0)
                 .scaleEffect(selectedStatus == .all ? 1 : 0.9)
                 .allowsHitTesting(selectedStatus == .all)

@@ -7,7 +7,19 @@
 
 import Foundation
 
-struct MetricFactory {
+enum MetricFactory {
+    
+    struct Summary {
+        let settledCount: Int
+        let totalStake: Int
+        let profit: Int
+        let roi: Double
+        let winRate: Double
+    }
+    
+    struct Breakdown {
+        
+    }
     
     static func profit(for coupons: [Coupon]) -> Int {
         var totalWinnings = 0
@@ -21,45 +33,25 @@ struct MetricFactory {
         return totalWinnings - totalStake
     }
     
-    static func totalWinnings(for coupons: [Coupon]) -> Int {
-        coupons.reduce(0) { $0 + $1.winnings }
-    }
-    
-    static func totalStake(for coupons: [Coupon]) -> Int {
-        coupons.reduce(0) { $0 + $1.stake }
-    }
-    
-    static func settledCount(for coupons: [Coupon]) -> Int {
-        coupons.reduce(0) { $1.totalStatus != .pending ? $0 + 1 : $0 }
-    }
-    
-    static func roi(for coupons: [Coupon]) -> Double {
-        var totalWinnings = 0
+    static func summary(for coupons: [Coupon]) -> Summary {
         var totalStake = 0
+        var totalWinnings = 0
+        var wins = 0
         for coupon in coupons {
-            guard coupon.totalStatus != .pending else { continue }
             totalWinnings += coupon.winnings
             totalStake += coupon.stake
-        }
-        guard totalStake > 0 else { return 0 }
-        let profit = totalWinnings - totalStake
-//        let rawValue = Double(profit) / Double(totalStake) * 100
-//        return rawValue.formatted(.number.precision(.fractionLength(2)).sign(strategy: .always())) OR INT?
-        return Double(profit) / Double(totalStake) * 100
-    }
-    
-    static func winRate(for coupons: [Coupon]) -> Double {
-        var wins = 0
-        var losses = 0
-        for coupon in coupons {
-            switch coupon.totalStatus {
-            case .won: wins += 1
-            case .lost: losses += 1
-            default: continue
+            if coupon.totalStatus == .won {
+                wins += 1
             }
         }
-        let settled = wins + losses
-        guard settled > 0 else { return 0 }
-        return Double(wins) / Double(settled) * 100
+        let profit = totalWinnings - totalStake
+        let roi = totalStake > 0 ? Double(profit) / Double(totalStake) : 0
+        let winRate = coupons.isEmpty ? 0 : Double(wins) / Double(coupons.count)
+        return Summary(
+            settledCount: coupons.count,
+            totalStake: totalStake,
+            profit: profit,
+            roi: roi,
+            winRate: winRate)
     }
 }

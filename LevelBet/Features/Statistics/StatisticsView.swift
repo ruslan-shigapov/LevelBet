@@ -24,7 +24,8 @@ struct StatisticsView: View {
         List {
             PeriodPicker()
             if !filtered.isEmpty {
-                MainSection()
+                SummarySection(for: MetricFactory.summary(for: filtered))
+                BreakdownSection()
             }
         }
         .overlay(alignment: .center) {
@@ -33,6 +34,10 @@ struct StatisticsView: View {
             }
         }
         .background(Color.lightMidnight)
+    }
+    
+    private func format(fraction: Double) -> String {
+        fraction.formatted(.percent.precision(.fractionLength(0...1)))
     }
 }
 
@@ -49,14 +54,29 @@ private extension StatisticsView {
         .listRowBackground(Color.clear)
     }
     
-    func MainSection() -> some View {
+    func SummarySection(for metrics: MetricFactory.Summary) -> some View {
         Section("Сводка") {
             LabeledContent(
                 "Расчитанные купоны",
-                value: String(MetricFactory.settledCount(for: filtered)))
+                value: metrics.settledCount.formatted())
             LabeledContent(
-                "Чистая прибыль",
-                value: String(MetricFactory.profit(for: filtered)))
+                "Общая сумма",
+                value: metrics.totalStake.formatted())
+            LabeledContent(
+                "Профит",
+                value: metrics.profit.formatted())
+            LabeledContent(
+                "ROI",
+                value: format(fraction: metrics.roi))
+            LabeledContent(
+                "Винрейт",
+                value: format(fraction: metrics.winRate))
+        }
+    }
+    
+    func BreakdownSection() -> some View {
+        Section("Срезы") {
+            
         }
     }
     

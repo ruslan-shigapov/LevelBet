@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FilterFactory {
+enum FilterFactory {
     
     static func matches(
         coupon: Coupon,
