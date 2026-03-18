@@ -25,7 +25,7 @@ struct StatisticsView: View {
             PeriodPicker()
             if !filtered.isEmpty {
                 SummarySection(for: MetricFactory.summary(for: filtered))
-                BreakdownSection()
+                BreakdownSection(for: MetricFactory.breakdown(for: filtered))
             }
         }
         .overlay(alignment: .center) {
@@ -74,9 +74,19 @@ private extension StatisticsView {
         }
     }
     
-    func BreakdownSection() -> some View {
+    func BreakdownSection(for metrics: MetricFactory.Breakdown) -> some View {
         Section("Срезы") {
-            
+            LabeledContent(
+                "Сумма",
+                value: metrics.stake.overall.formatted())
+            LabeledContent(
+                "Коэффициент",
+                value: metrics.odds.overall
+                    .formatted(.number.precision(.fractionLength(2))))
+            LabeledContent(
+                "События",
+                value: metrics.eventCount.overall
+                    .formatted(.number.precision(.fractionLength(1))))
         }
     }
     
