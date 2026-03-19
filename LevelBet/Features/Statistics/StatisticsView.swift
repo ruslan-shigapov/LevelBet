@@ -75,18 +75,36 @@ private extension StatisticsView {
     }
     
     func BreakdownSection(for metrics: MetricFactory.Breakdown) -> some View {
-        Section("Срезы") {
-            LabeledContent(
-                "Сумма",
-                value: metrics.stake.overall.formatted())
-            LabeledContent(
-                "Коэффициент",
-                value: metrics.odds.overall
+        Section("Средние") {
+            BreakdownView(
+                title: "Сумма",
+                overall: metrics.stake.overall.formatted(),
+                won: metrics.stake.won.formatted(),
+                lost: metrics.stake.lost.formatted())
+            BreakdownView(
+                title: "Коэф. купона",
+                overall: metrics.totalOdds.overall
+                    .formatted(.number.precision(.fractionLength(2))),
+                won: metrics.totalOdds.won
+                    .formatted(.number.precision(.fractionLength(2))),
+                lost: metrics.totalOdds.lost
                     .formatted(.number.precision(.fractionLength(2))))
-            LabeledContent(
-                "События",
-                value: metrics.eventCount.overall
-                    .formatted(.number.precision(.fractionLength(1))))
+            BreakdownView(
+                title: "Коэф. события",
+                overall: metrics.odds.overall
+                    .formatted(.number.precision(.fractionLength(2))),
+                won: metrics.odds.won
+                    .formatted(.number.precision(.fractionLength(2))),
+                lost: metrics.odds.lost
+                    .formatted(.number.precision(.fractionLength(2))))
+            BreakdownView(
+                title: "Кол-во событий",
+                overall: metrics.eventCount.overall
+                    .formatted(.number.precision(.fractionLength(0...1))),
+                won: metrics.eventCount.won
+                    .formatted(.number.precision(.fractionLength(0...1))),
+                lost: metrics.eventCount.lost
+                    .formatted(.number.precision(.fractionLength(0...1))))
         }
     }
     

@@ -7,6 +7,20 @@
 
 import Foundation
 
+private struct Accumulator {
+    var sum = 0.0
+    var count = 0
+    
+    mutating func add(_ value: Double) {
+        sum += value
+        count += 1
+    }
+    
+    var average: Double {
+        count == 0 ? 0 : sum / Double(count)
+    }
+}
+
 enum MetricFactory {
     
     struct Summary {
@@ -20,20 +34,6 @@ enum MetricFactory {
     struct Breakdown {
         
         struct Value {
-            
-            private struct Accumulator {
-                var sum = 0.0
-                var count = 0
-                
-                mutating func add(_ value: Double) {
-                    sum += value
-                    count += 1
-                }
-                
-                var average: Double {
-                    count == 0 ? 0 : sum / Double(count)
-                }
-            }
             
             let overall: Double
             let won: Double
@@ -55,6 +55,27 @@ enum MetricFactory {
                     default: break
                     }
                 }
+                
+                return .init(
+                    overall: overallAccumulator.average,
+                    won: wonAccumulator.average,
+                    lost: lostAccumulator.average)
+            }
+            
+            static func averageOdds(for coupons: [Coupon]) -> Self {
+                var overallAccumulator = Accumulator()
+                var wonAccumulator = Accumulator()
+                var lostAccumulator = Accumulator()
+                for coupon in coupons {
+                    for event in coupon.events {
+                        overallAccumulator.add(event.odds)
+                        switch event.status {
+                        case .won: wonAccumulator.add(event.odds)
+                        case .lost: lostAccumulator.add(event.odds)
+                        default: break
+                        }
+                    }
+                }
                 return .init(
                     overall: overallAccumulator.average,
                     won: wonAccumulator.average,
@@ -63,6 +84,7 @@ enum MetricFactory {
         }
         
         let stake: Value
+        let totalOdds: Value
         let odds: Value
         let eventCount: Value
     }
@@ -104,7 +126,8 @@ enum MetricFactory {
     static func breakdown(for coupons: [Coupon]) -> Breakdown {
         .init(
             stake: .average(for: coupons) { Double($0.stake) },
-            odds: .average(for: coupons) { $0.totalOdds },
+            totalOdds: .average(for: coupons) { $0.totalOdds },
+            odds: .averageOdds(for: coupons),
             eventCount: .average(for: coupons) { Double($0.events.count) })
     }
 }
