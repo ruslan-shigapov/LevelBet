@@ -14,6 +14,15 @@ struct StatisticsView: View {
     
     @State private var selectedPeriod: Periods = .week
     
+    @ToolbarContentBuilder
+    private var toolbarContent: some ToolbarContent {
+        ToolbarItem(placement: .topBarLeading) {
+            ToolbarButton(type: .info) {
+                // TODO: show modal view
+            }
+        }
+    }
+    
     private var filtered: [Coupon] {
         coupons.filter {
             FilterFactory.matches(coupon: $0, period: selectedPeriod)
@@ -25,7 +34,7 @@ struct StatisticsView: View {
             PeriodPicker()
             if !filtered.isEmpty {
                 SummarySection(for: MetricFactory.summary(for: filtered))
-                BreakdownSection(for: MetricFactory.breakdown(for: filtered))
+                BreakdownSection(for: MetricFactory.averages(for: filtered))
             }
         }
         .overlay(alignment: .center) {
@@ -34,6 +43,7 @@ struct StatisticsView: View {
             }
         }
         .background(Color.lightMidnight)
+        .toolbar { toolbarContent }
     }
     
     private func format(fraction: Double) -> String {
@@ -62,26 +72,47 @@ private extension StatisticsView {
             LabeledContent(
                 "Общая сумма",
                 value: metrics.totalStake.formatted())
+            LabeledContent("Профит") {
+                Text(metrics.profit.formatted())
+                    .foregroundStyle(metrics.profit < 0
+                        ? .red
+                        : metrics.profit > 0 ? .green : .secondary)
+            }
+            LabeledContent {
+                Text(format(fraction: metrics.roi))
+                    .foregroundStyle(
+                        metrics.roi < 0
+                        ? .red
+                        : metrics.roi > 0 ? .green : .secondary)
+            } label: {
+                HStack {
+                    Text("ROI")
+                    Image(systemName: "chevron.right")
+                        .imageScale(.small)
+                        .foregroundStyle(Color.accentColor)
+                }
+            }
+            .contentShape(.rect)
+            .onTapGesture {
+                // TODO: show modal view
+            }
             LabeledContent(
-                "Профит",
-                value: metrics.profit.formatted())
-            LabeledContent(
-                "ROI",
-                value: format(fraction: metrics.roi))
-            LabeledContent(
-                "Винрейт",
+                "Винрейт по купонам",
                 value: format(fraction: metrics.winRate))
+            LabeledContent(
+                "Винрейт по событиям",
+                value: format(fraction: metrics.eventWinRate))
         }
     }
     
-    func BreakdownSection(for metrics: MetricFactory.Breakdown) -> some View {
+    func BreakdownSection(for metrics: MetricFactory.Averages) -> some View {
         Section("Средние") {
-            BreakdownView(
+            AveragesView(
                 title: "Сумма",
                 overall: metrics.stake.overall.formatted(),
                 won: metrics.stake.won.formatted(),
                 lost: metrics.stake.lost.formatted())
-            BreakdownView(
+            AveragesView(
                 title: "Коэф. купона",
                 overall: metrics.totalOdds.overall
                     .formatted(.number.precision(.fractionLength(2))),
@@ -89,7 +120,7 @@ private extension StatisticsView {
                     .formatted(.number.precision(.fractionLength(2))),
                 lost: metrics.totalOdds.lost
                     .formatted(.number.precision(.fractionLength(2))))
-            BreakdownView(
+            AveragesView(
                 title: "Коэф. события",
                 overall: metrics.odds.overall
                     .formatted(.number.precision(.fractionLength(2))),
@@ -97,7 +128,7 @@ private extension StatisticsView {
                     .formatted(.number.precision(.fractionLength(2))),
                 lost: metrics.odds.lost
                     .formatted(.number.precision(.fractionLength(2))))
-            BreakdownView(
+            AveragesView(
                 title: "Кол-во событий",
                 overall: metrics.eventCount.overall
                     .formatted(.number.precision(.fractionLength(0...1))),

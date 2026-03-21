@@ -23,15 +23,18 @@ private struct Accumulator {
 
 enum MetricFactory {
     
+    // MARK: Summary
     struct Summary {
         let settledCount: Int
         let totalStake: Int
         let profit: Int
         let roi: Double
         let winRate: Double
+        let eventWinRate: Double
     }
     
-    struct Breakdown {
+    // MARK: Averages
+    struct Averages {
         
         struct Value {
             
@@ -89,6 +92,22 @@ enum MetricFactory {
         let eventCount: Value
     }
     
+    // MARK: Private Methods
+    private static func eventWinRate(for coupons: [Coupon]) -> Double {
+        var total = 0
+        var won = 0
+        for coupon in coupons {
+            for event in coupon.events {
+                total += 1
+                if event.status == .won {
+                    won += 1
+                }
+            }
+        }
+        return total > 0 ? Double(won) / Double(total) : 0
+    }
+    
+    // MARK: Public Methods
     static func profit(for coupons: [Coupon]) -> Int {
         var totalWinnings = 0
         var totalStake = 0
@@ -120,10 +139,11 @@ enum MetricFactory {
             totalStake: totalStake,
             profit: profit,
             roi: roi,
-            winRate: winRate)
+            winRate: winRate,
+            eventWinRate: eventWinRate(for: coupons))
     }
     
-    static func breakdown(for coupons: [Coupon]) -> Breakdown {
+    static func averages(for coupons: [Coupon]) -> Averages {
         .init(
             stake: .average(for: coupons) { Double($0.stake) },
             totalOdds: .average(for: coupons) { $0.totalOdds },

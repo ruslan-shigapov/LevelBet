@@ -1,5 +1,5 @@
 //
-//  BreakdownView.swift
+//  AveragesView.swift
 //  LevelBet
 //
 //  Created by Ruslan Shigapov on 19.03.2026.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BreakdownView: View {
+struct AveragesView: View {
     
     @State private var isExpanded = false
     
@@ -21,7 +21,7 @@ struct BreakdownView: View {
             HStack {
                 Image(systemName: isExpanded ? "chevron.down" : "chevron.right")
                     .imageScale(.small)
-                    .foregroundStyle(Color.accentColor)
+                    .foregroundStyle(.secondary)
                 LabeledContent(title, value: overall)
             }
             if isExpanded {

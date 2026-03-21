@@ -10,13 +10,14 @@ import SwiftUI
 struct ToolbarButton: View {
     
     enum ToolbarButtonType {
-        case add, cancel, done
+        case add, cancel, done, info
         
         var imageName: String {
             switch self {
             case .add: "plus"
             case .cancel: "xmark"
             case .done: "checkmark"
+            case .info: "questionmark"
             }
         }
     }

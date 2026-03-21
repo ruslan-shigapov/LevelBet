@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E40E72DA2F5ECB260072E057 /* MetricFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40E72D92F5ECB260072E057 /* MetricFactory.swift */; };
-		E41DB5EF2F6BFB5000DF71F3 /* BreakdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41DB5EE2F6BFB5000DF71F3 /* BreakdownView.swift */; };
+		E41DB5EF2F6BFB5000DF71F3 /* AveragesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41DB5EE2F6BFB5000DF71F3 /* AveragesView.swift */; };
 		E41F1B192F518CE7003F90B8 /* Layouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41F1B182F518CE7003F90B8 /* Layouts.swift */; };
 		E41F1B1F2F51ADA1003F90B8 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41F1B1E2F51ADA1003F90B8 /* View+Extension.swift */; };
 		E44F95802F4EFAC8001B9E72 /* EventSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44F957F2F4EFAC8001B9E72 /* EventSectionView.swift */; };
@@ -39,7 +39,7 @@
 
 /* Begin PBXFileReference section */
 		E40E72D92F5ECB260072E057 /* MetricFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricFactory.swift; sourceTree = "<group>"; };
-		E41DB5EE2F6BFB5000DF71F3 /* BreakdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakdownView.swift; sourceTree = "<group>"; };
+		E41DB5EE2F6BFB5000DF71F3 /* AveragesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AveragesView.swift; sourceTree = "<group>"; };
 		E41F1B182F518CE7003F90B8 /* Layouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layouts.swift; sourceTree = "<group>"; };
 		E41F1B1E2F51ADA1003F90B8 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		E44F957F2F4EFAC8001B9E72 /* EventSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSectionView.swift; sourceTree = "<group>"; };
@@ -83,7 +83,7 @@
 		E41DB5ED2F6BFB2700DF71F3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E41DB5EE2F6BFB5000DF71F3 /* BreakdownView.swift */,
+				E41DB5EE2F6BFB5000DF71F3 /* AveragesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -363,7 +363,7 @@
 				E48AE6292F58364B00E5E80E /* FilterFactory.swift in Sources */,
 				E40E72DA2F5ECB260072E057 /* MetricFactory.swift in Sources */,
 				E4F985712F1E2587001CB75F /* ResultsView.swift in Sources */,
-				E41DB5EF2F6BFB5000DF71F3 /* BreakdownView.swift in Sources */,
+				E41DB5EF2F6BFB5000DF71F3 /* AveragesView.swift in Sources */,
 				E4F985662F1E24FE001CB75F /* Coupon.swift in Sources */,
 				E41F1B1F2F51ADA1003F90B8 /* View+Extension.swift in Sources */,
 				E4F24B982F4D9F0900DC2252 /* FilterMenu.swift in Sources */,
