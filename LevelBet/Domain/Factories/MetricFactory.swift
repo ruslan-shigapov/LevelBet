@@ -51,10 +51,13 @@ enum MetricFactory {
                 var lostAccumulator = Accumulator()
                 for coupon in coupons {
                     let value = metric(coupon)
-                    overallAccumulator.add(value)
                     switch coupon.totalStatus {
-                    case .won: wonAccumulator.add(value)
-                    case .lost: lostAccumulator.add(value)
+                    case .won:
+                        wonAccumulator.add(value)
+                        overallAccumulator.add(value)
+                    case .lost:
+                        lostAccumulator.add(value)
+                        overallAccumulator.add(value)
                     default: break
                     }
                 }

@@ -45,7 +45,9 @@ struct MainSectionView: View {
     }
     
     private func calculateWinnings() -> Double {
-        (Double(stake.replacingOccurrences(of: " ", with: "")) ?? 0) * totalOdds
+        let stakeValue = Double(stake.replacingOccurrences(of: " ", with: ""))
+        let roundedOdds = round(totalOdds * 100) / 100
+        return (stakeValue ?? 0) * roundedOdds
     }
 }
 
@@ -86,12 +88,10 @@ private extension MainSectionView {
     
     func LabeledTotalOdds() -> some View {
         LabeledContent("Общий коэффициент") {
-            Text(
-                totalOdds.formatted(
-                    .number.precision(.fractionLength(0...2))))
-            .monospaced()
-            .frame(width: 140, alignment: .trailing)
-            .lineLimit(1)
+            Text(totalOdds.oddsFormatted)
+                .monospaced()
+                .frame(width: 140, alignment: .trailing)
+                .lineLimit(1)
         }
     }
     

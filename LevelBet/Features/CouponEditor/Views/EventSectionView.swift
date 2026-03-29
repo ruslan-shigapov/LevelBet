@@ -38,7 +38,7 @@ private extension EventSectionView {
                 HStack(spacing: Layouts.standardOffset) {
                     StatusPicker($event.status)
                     LabeledContent(event.sport.rawValue) {
-                        Text(event.odds.formatted())
+                        Text(event.odds.oddsFormatted)
                             .monospaced()
                     }
                     .foregroundStyle(.secondary)

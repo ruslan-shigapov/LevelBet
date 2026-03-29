@@ -19,7 +19,7 @@ final class Coupon {
     var events: [Event] = []
     
     var totalOdds: Double {
-        events.reduce(1) { $0 * $1.odds }
+        round(events.reduce(1) { $0 * $1.odds } * 100) / 100
     }
     
     var winnings: Int {

@@ -7,18 +7,21 @@
 
 import SwiftUI
 import SwiftData
+import Charts
 
 struct StatisticsView: View {
     
     @Query private var coupons: [Coupon]
     
+    @State private var isInfoPresented = false
+    @State private var isROIDetailsPresented = false
     @State private var selectedPeriod: Periods = .week
     
     @ToolbarContentBuilder
     private var toolbarContent: some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
             ToolbarButton(type: .info) {
-                // TODO: show modal view
+                isInfoPresented = true
             }
         }
     }
@@ -27,6 +30,23 @@ struct StatisticsView: View {
         coupons.filter {
             FilterFactory.matches(coupon: $0, period: selectedPeriod)
         }
+    }
+    
+    private var grouped: [Date: [Coupon]] {
+        let calendar = Calendar.current
+        return Dictionary(grouping: filtered) {
+            let date = $0.timestamp
+            return selectedPeriod == .year
+            ? calendar.date(
+                from: calendar.dateComponents(
+                    [.year, .month],
+                    from: date)) ?? date
+            : calendar.startOfDay(for: date)
+        }
+    }
+    
+    private var sortedDates: [Date] {
+        grouped.keys.sorted()
     }
     
     var body: some View {
@@ -44,6 +64,11 @@ struct StatisticsView: View {
         }
         .background(Color.lightMidnight)
         .toolbar { toolbarContent }
+        .sheet(isPresented: $isInfoPresented) {}
+        .sheet(isPresented: $isROIDetailsPresented) {
+            ROIDetailsView(coupons: filtered)
+                .presentationDragIndicator(.visible)
+        }
     }
     
     private func format(fraction: Double) -> String {
@@ -66,17 +91,38 @@ private extension StatisticsView {
     
     func SummarySection(for metrics: MetricFactory.Summary) -> some View {
         Section("Сводка") {
-            LabeledContent(
-                "Расчитанные купоны",
-                value: metrics.settledCount.formatted())
-            LabeledContent(
-                "Общая сумма",
-                value: metrics.totalStake.formatted())
-            LabeledContent("Профит") {
-                Text(metrics.profit.formatted())
-                    .foregroundStyle(metrics.profit < 0
-                        ? .red
-                        : metrics.profit > 0 ? .green : .secondary)
+            VStack {
+                Chart {
+                    ForEach(sortedDates, id: \.self) {
+                        let profit = MetricFactory.profit(
+                            for: grouped[$0] ?? [])
+                        LineMark(
+                            x: .value("", $0),
+                            y: .value("",profit))
+                        .foregroundStyle(.white.opacity(0.4))
+                        PointMark(
+                            x: .value("", $0),
+                            y: .value("",profit))
+                        .foregroundStyle(profit > 0 ? .green : .red)
+                    }
+                }
+                .chartXAxis {
+                    AxisMarks(values: sortedDates) {
+                        AxisGridLine()
+                        AxisValueLabel(
+                            format: selectedPeriod == .year
+                            ? .dateTime.month(.abbreviated)
+                            : .dateTime.day())
+                    }
+                }
+                .padding(Layouts.smallOffset)
+                LabeledContent("Профит") {
+                    Text(metrics.profit.formatted())
+                        .foregroundStyle(
+                            metrics.profit < 0
+                            ? .red
+                            : metrics.profit > 0 ? .green : .secondary)
+                }
             }
             LabeledContent {
                 Text(format(fraction: metrics.roi))
@@ -94,8 +140,14 @@ private extension StatisticsView {
             }
             .contentShape(.rect)
             .onTapGesture {
-                // TODO: show modal view
+                isROIDetailsPresented = true
             }
+            LabeledContent(
+                "Общая сумма",
+                value: metrics.totalStake.formatted())
+            LabeledContent(
+                "Расчитанные купоны",
+                value: metrics.settledCount.formatted())
             LabeledContent(
                 "Винрейт по купонам",
                 value: format(fraction: metrics.winRate))
@@ -109,25 +161,22 @@ private extension StatisticsView {
         Section("Средние") {
             AveragesView(
                 title: "Сумма",
-                overall: metrics.stake.overall.formatted(),
-                won: metrics.stake.won.formatted(),
-                lost: metrics.stake.lost.formatted())
+                overall: metrics.stake.overall
+                    .formatted(.number.precision(.fractionLength(0))),
+                won: metrics.stake.won
+                    .formatted(.number.precision(.fractionLength(0))),
+                lost: metrics.stake.lost
+                    .formatted(.number.precision(.fractionLength(0))))
             AveragesView(
                 title: "Коэф. купона",
-                overall: metrics.totalOdds.overall
-                    .formatted(.number.precision(.fractionLength(2))),
-                won: metrics.totalOdds.won
-                    .formatted(.number.precision(.fractionLength(2))),
-                lost: metrics.totalOdds.lost
-                    .formatted(.number.precision(.fractionLength(2))))
+                overall: metrics.totalOdds.overall.oddsFormatted,
+                won: metrics.totalOdds.won.oddsFormatted,
+                lost: metrics.totalOdds.lost.oddsFormatted)
             AveragesView(
                 title: "Коэф. события",
-                overall: metrics.odds.overall
-                    .formatted(.number.precision(.fractionLength(2))),
-                won: metrics.odds.won
-                    .formatted(.number.precision(.fractionLength(2))),
-                lost: metrics.odds.lost
-                    .formatted(.number.precision(.fractionLength(2))))
+                overall: metrics.odds.overall.oddsFormatted,
+                won: metrics.odds.won.oddsFormatted,
+                lost: metrics.odds.lost.oddsFormatted)
             AveragesView(
                 title: "Кол-во событий",
                 overall: metrics.eventCount.overall

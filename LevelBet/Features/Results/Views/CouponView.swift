@@ -19,8 +19,7 @@ struct CouponView: View {
     
     init(coupon: Coupon) {
         self.coupon = coupon
-        totalOdds = coupon.totalOdds
-            .formatted(.number.precision(.fractionLength(0...2)))
+        totalOdds = coupon.totalOdds.oddsFormatted
         eventsCount = coupon.events.count
         totalStatus = coupon.totalStatus
         stake = coupon.stake.formatted()

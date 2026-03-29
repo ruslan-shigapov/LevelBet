@@ -12,6 +12,7 @@ enum Sports: String, Codable, CaseIterable, Identifiable {
     case tennis = "Теннис"
     case basketball = "Баскетбол"
     case esports = "Киберспорт"
+    case other = "Другое"
     
     var imageName: String {
         switch self {
@@ -20,6 +21,7 @@ enum Sports: String, Codable, CaseIterable, Identifiable {
         case .tennis: "tennisball"
         case .basketball: "basketball"
         case .esports: "gamecontroller"
+        case .other: "volleyball"
         }
     }
     
