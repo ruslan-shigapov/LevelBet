@@ -9,17 +9,20 @@ import SwiftUI
 
 struct MainSectionView: View {
     
+    // MARK: Private Properties
     @FocusState private var isFocused: Bool
     
     private var isValid: Bool {
         !stake.isEmpty && stake != "0"
     }
     
+    // MARK: Public Properties
     @Binding var stake: String
     
     let totalOdds: Double
     let totalStatus: Statuses
     
+    // MARK: Body
     var body: some View {
         Section {
             LabeledStakeTextField()
@@ -31,6 +34,7 @@ struct MainSectionView: View {
         }
     }
     
+    // MARK: Private Methods
     private func sanitize(input: String) -> String {
         let filtered = String(input.filter(\.isNumber).prefix(8))
         return formatWithSpaces(filtered)
@@ -47,10 +51,11 @@ struct MainSectionView: View {
     private func calculateWinnings() -> Double {
         let stakeValue = Double(stake.replacingOccurrences(of: " ", with: ""))
         let roundedOdds = round(totalOdds * 100) / 100
-        return (stakeValue ?? 0) * roundedOdds
+        return ((stakeValue ?? 0) * roundedOdds).rounded()
     }
 }
 
+// MARK: - Views
 private extension MainSectionView {
     
     func LabeledStakeTextField() -> some View {

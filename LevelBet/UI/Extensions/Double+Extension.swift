@@ -12,4 +12,8 @@ extension Double {
     var oddsFormatted: String {
         formatted(.number.precision(.fractionLength(2)))
     }
+    
+    var fractionFormatted: String {
+        formatted(.percent.precision(.fractionLength(0...1)))
+    }
 }

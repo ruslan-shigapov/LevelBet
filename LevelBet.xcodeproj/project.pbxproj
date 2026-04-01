@@ -8,10 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		E40E72DA2F5ECB260072E057 /* MetricFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40E72D92F5ECB260072E057 /* MetricFactory.swift */; };
+		E412CF082F7BCFB500F1ED75 /* OddsRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = E412CF072F7BCFB500F1ED75 /* OddsRange.swift */; };
+		E412CF0A2F7BD79500F1ED75 /* WinRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E412CF092F7BD79500F1ED75 /* WinRateView.swift */; };
 		E41DB5EF2F6BFB5000DF71F3 /* AveragesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41DB5EE2F6BFB5000DF71F3 /* AveragesView.swift */; };
 		E41F1B192F518CE7003F90B8 /* Layouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41F1B182F518CE7003F90B8 /* Layouts.swift */; };
 		E41F1B1F2F51ADA1003F90B8 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41F1B1E2F51ADA1003F90B8 /* View+Extension.swift */; };
-		E43321462F73E8410013DDED /* ROIDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43321452F73E8410013DDED /* ROIDetailsView.swift */; };
+		E43321462F73E8410013DDED /* ROIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43321452F73E8410013DDED /* ROIView.swift */; };
+		E445F4AF2F7D2C4C00EB889C /* EventWinRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E445F4AE2F7D2C4C00EB889C /* EventWinRateView.swift */; };
+		E445F4B12F7D3A7600EB889C /* EventOddsRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = E445F4B02F7D3A7600EB889C /* EventOddsRange.swift */; };
 		E44F95802F4EFAC8001B9E72 /* EventSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44F957F2F4EFAC8001B9E72 /* EventSectionView.swift */; };
 		E44F95842F4F03C0001B9E72 /* MainSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44F95832F4F03C0001B9E72 /* MainSectionView.swift */; };
 		E48AE6292F58364B00E5E80E /* FilterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48AE6282F58364B00E5E80E /* FilterFactory.swift */; };
@@ -24,6 +28,7 @@
 		E49F88B42F28BDAF002F0C6B /* CouponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49F88B32F28BDAF002F0C6B /* CouponView.swift */; };
 		E49F88B62F28BDE9002F0C6B /* CouponEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49F88B52F28BDE9002F0C6B /* CouponEditorView.swift */; };
 		E49F88B92F28BE3E002F0C6B /* ToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49F88B82F28BE3E002F0C6B /* ToolbarButton.swift */; };
+		E4A6869F2F7A920300598B10 /* EventRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A6869E2F7A920300598B10 /* EventRange.swift */; };
 		E4A8F3732F2785740084311F /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A8F3722F2785740084311F /* Event.swift */; };
 		E4A8F3762F2785AD0084311F /* Sports.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A8F3752F2785AD0084311F /* Sports.swift */; };
 		E4B427DF2F76725A008B0300 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B427DE2F76725A008B0300 /* Double+Extension.swift */; };
@@ -41,10 +46,14 @@
 
 /* Begin PBXFileReference section */
 		E40E72D92F5ECB260072E057 /* MetricFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricFactory.swift; sourceTree = "<group>"; };
+		E412CF072F7BCFB500F1ED75 /* OddsRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OddsRange.swift; sourceTree = "<group>"; };
+		E412CF092F7BD79500F1ED75 /* WinRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinRateView.swift; sourceTree = "<group>"; };
 		E41DB5EE2F6BFB5000DF71F3 /* AveragesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AveragesView.swift; sourceTree = "<group>"; };
 		E41F1B182F518CE7003F90B8 /* Layouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layouts.swift; sourceTree = "<group>"; };
 		E41F1B1E2F51ADA1003F90B8 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
-		E43321452F73E8410013DDED /* ROIDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ROIDetailsView.swift; sourceTree = "<group>"; };
+		E43321452F73E8410013DDED /* ROIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ROIView.swift; sourceTree = "<group>"; };
+		E445F4AE2F7D2C4C00EB889C /* EventWinRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventWinRateView.swift; sourceTree = "<group>"; };
+		E445F4B02F7D3A7600EB889C /* EventOddsRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventOddsRange.swift; sourceTree = "<group>"; };
 		E44F957F2F4EFAC8001B9E72 /* EventSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSectionView.swift; sourceTree = "<group>"; };
 		E44F95832F4F03C0001B9E72 /* MainSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSectionView.swift; sourceTree = "<group>"; };
 		E48AE6282F58364B00E5E80E /* FilterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterFactory.swift; sourceTree = "<group>"; };
@@ -57,6 +66,7 @@
 		E49F88B32F28BDAF002F0C6B /* CouponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponView.swift; sourceTree = "<group>"; };
 		E49F88B52F28BDE9002F0C6B /* CouponEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponEditorView.swift; sourceTree = "<group>"; };
 		E49F88B82F28BE3E002F0C6B /* ToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarButton.swift; sourceTree = "<group>"; };
+		E4A6869E2F7A920300598B10 /* EventRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRange.swift; sourceTree = "<group>"; };
 		E4A8F3722F2785740084311F /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		E4A8F3752F2785AD0084311F /* Sports.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sports.swift; sourceTree = "<group>"; };
 		E4B427DE2F76725A008B0300 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
@@ -88,6 +98,9 @@
 			isa = PBXGroup;
 			children = (
 				E41DB5EE2F6BFB5000DF71F3 /* AveragesView.swift */,
+				E43321452F73E8410013DDED /* ROIView.swift */,
+				E412CF092F7BD79500F1ED75 /* WinRateView.swift */,
+				E445F4AE2F7D2C4C00EB889C /* EventWinRateView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -163,6 +176,9 @@
 				E4A8F3752F2785AD0084311F /* Sports.swift */,
 				E49F88A62F28BBA8002F0C6B /* Statuses.swift */,
 				E49F88A82F28BBBD002F0C6B /* Periods.swift */,
+				E4A6869E2F7A920300598B10 /* EventRange.swift */,
+				E412CF072F7BCFB500F1ED75 /* OddsRange.swift */,
+				E445F4B02F7D3A7600EB889C /* EventOddsRange.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -276,7 +292,6 @@
 			children = (
 				E41DB5ED2F6BFB2700DF71F3 /* Views */,
 				E4F985722F1E2592001CB75F /* StatisticsView.swift */,
-				E43321452F73E8410013DDED /* ROIDetailsView.swift */,
 			);
 			path = Statistics;
 			sourceTree = "<group>";
@@ -367,25 +382,30 @@
 				E4A8F3762F2785AD0084311F /* Sports.swift in Sources */,
 				E44F95802F4EFAC8001B9E72 /* EventSectionView.swift in Sources */,
 				E48AE6292F58364B00E5E80E /* FilterFactory.swift in Sources */,
+				E445F4B12F7D3A7600EB889C /* EventOddsRange.swift in Sources */,
 				E40E72DA2F5ECB260072E057 /* MetricFactory.swift in Sources */,
 				E4F985712F1E2587001CB75F /* ResultsView.swift in Sources */,
 				E4B427DF2F76725A008B0300 /* Double+Extension.swift in Sources */,
 				E41DB5EF2F6BFB5000DF71F3 /* AveragesView.swift in Sources */,
 				E4F985662F1E24FE001CB75F /* Coupon.swift in Sources */,
 				E41F1B1F2F51ADA1003F90B8 /* View+Extension.swift in Sources */,
+				E4A6869F2F7A920300598B10 /* EventRange.swift in Sources */,
 				E4F24B982F4D9F0900DC2252 /* FilterMenu.swift in Sources */,
+				E412CF0A2F7BD79500F1ED75 /* WinRateView.swift in Sources */,
 				E4F985752F1E259A001CB75F /* ProfileView.swift in Sources */,
 				E49F88B22F28BD90002F0C6B /* CouponListView.swift in Sources */,
 				E49F88B62F28BDE9002F0C6B /* CouponEditorView.swift in Sources */,
 				E49F88AC2F28BCC2002F0C6B /* StatusBarView.swift in Sources */,
 				E41F1B192F518CE7003F90B8 /* Layouts.swift in Sources */,
 				E44F95842F4F03C0001B9E72 /* MainSectionView.swift in Sources */,
-				E43321462F73E8410013DDED /* ROIDetailsView.swift in Sources */,
+				E43321462F73E8410013DDED /* ROIView.swift in Sources */,
 				E49F88AE2F28BD45002F0C6B /* Statuses+Extension.swift in Sources */,
 				E4A8F3732F2785740084311F /* Event.swift in Sources */,
 				E49F88A72F28BBA8002F0C6B /* Statuses.swift in Sources */,
+				E445F4AF2F7D2C4C00EB889C /* EventWinRateView.swift in Sources */,
 				E49F88A42F28BB0F002F0C6B /* CouponService.swift in Sources */,
 				E4F24B9C2F4DA6B300DC2252 /* AddEventView.swift in Sources */,
+				E412CF082F7BCFB500F1ED75 /* OddsRange.swift in Sources */,
 				E49F88B42F28BDAF002F0C6B /* CouponView.swift in Sources */,
 				E49F88A92F28BBBD002F0C6B /* Periods.swift in Sources */,
 				E4F5865A2F559747009BD445 /* DeleteSwipeButton.swift in Sources */,

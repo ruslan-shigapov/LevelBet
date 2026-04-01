@@ -14,7 +14,9 @@ struct StatisticsView: View {
     @Query private var coupons: [Coupon]
     
     @State private var isInfoPresented = false
-    @State private var isROIDetailsPresented = false
+    @State private var isROIViewPresented = false
+    @State private var isWinRateViewPresented = false
+    @State private var isEventWinRateViewPresented = false
     @State private var selectedPeriod: Periods = .week
     
     @ToolbarContentBuilder
@@ -65,14 +67,21 @@ struct StatisticsView: View {
         .background(Color.lightMidnight)
         .toolbar { toolbarContent }
         .sheet(isPresented: $isInfoPresented) {}
-        .sheet(isPresented: $isROIDetailsPresented) {
-            ROIDetailsView(coupons: filtered)
+        .sheet(isPresented: $isROIViewPresented) {
+            ROIView(coupons: filtered)
+                .presentationDetents([.medium, .large])
                 .presentationDragIndicator(.visible)
         }
-    }
-    
-    private func format(fraction: Double) -> String {
-        fraction.formatted(.percent.precision(.fractionLength(0...1)))
+        .sheet(isPresented: $isWinRateViewPresented) {
+            WinRateView(coupons: filtered)
+                .presentationDetents([.medium, .large])
+                .presentationDragIndicator(.visible)
+        }
+        .sheet(isPresented: $isEventWinRateViewPresented) {
+            EventWinRateView(coupons: filtered)
+                .presentationDetents([.medium, .large])
+                .presentationDragIndicator(.visible)
+        }
     }
 }
 
@@ -125,7 +134,7 @@ private extension StatisticsView {
                 }
             }
             LabeledContent {
-                Text(format(fraction: metrics.roi))
+                Text(metrics.roi.fractionFormatted)
                     .foregroundStyle(
                         metrics.roi < 0
                         ? .red
@@ -140,7 +149,7 @@ private extension StatisticsView {
             }
             .contentShape(.rect)
             .onTapGesture {
-                isROIDetailsPresented = true
+                isROIViewPresented = true
             }
             LabeledContent(
                 "Общая сумма",
@@ -148,12 +157,42 @@ private extension StatisticsView {
             LabeledContent(
                 "Расчитанные купоны",
                 value: metrics.settledCount.formatted())
-            LabeledContent(
-                "Винрейт по купонам",
-                value: format(fraction: metrics.winRate))
-            LabeledContent(
-                "Винрейт по событиям",
-                value: format(fraction: metrics.eventWinRate))
+            LabeledContent {
+                Text(metrics.winRate.fractionFormatted)
+            } label: {
+                HStack {
+                    Text("Винрейт (купоны)")
+                    if !metrics.winRate.isZero {
+                        Image(systemName: "chevron.right")
+                            .imageScale(.small)
+                            .foregroundStyle(Color.accentColor)
+                    }
+                }
+            }
+            .contentShape(.rect)
+            .onTapGesture {
+                if !metrics.winRate.isZero {
+                    isWinRateViewPresented = true
+                }
+            }
+            LabeledContent {
+                Text(metrics.eventWinRate.fractionFormatted)
+            } label: {
+                HStack {
+                    Text("Винрейт (события)")
+                    if !metrics.eventWinRate.isZero {
+                        Image(systemName: "chevron.right")
+                            .imageScale(.small)
+                            .foregroundStyle(Color.accentColor)
+                    }
+                }
+            }
+            .contentShape(.rect)
+            .onTapGesture {
+                if !metrics.eventWinRate.isZero {
+                    isEventWinRateViewPresented = true
+                }
+            }
         }
     }
     

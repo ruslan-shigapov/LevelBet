@@ -23,7 +23,7 @@ final class Coupon {
     }
     
     var winnings: Int {
-        totalStatus == .lost ? 0 : Int(Double(stake) * totalOdds)
+        totalStatus == .lost ? 0 : Int((Double(stake) * totalOdds).rounded())
     }
     
     init(timestamp: Date, stake: Int, totalStatus: Statuses) {

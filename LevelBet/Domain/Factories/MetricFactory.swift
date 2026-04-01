@@ -25,10 +25,10 @@ enum MetricFactory {
     
     // MARK: Summary
     struct Summary {
-        let settledCount: Int
-        let totalStake: Int
         let profit: Int
         let roi: Double
+        let totalStake: Int
+        let settledCount: Int
         let winRate: Double
         let eventWinRate: Double
     }
@@ -126,22 +126,22 @@ enum MetricFactory {
     static func summary(for coupons: [Coupon]) -> Summary {
         var totalStake = 0
         var totalWinnings = 0
-        var wins = 0
+        var won = 0
         for coupon in coupons {
             totalWinnings += coupon.winnings
             totalStake += coupon.stake
             if coupon.totalStatus == .won {
-                wins += 1
+                won += 1
             }
         }
         let profit = totalWinnings - totalStake
         let roi = totalStake > 0 ? Double(profit) / Double(totalStake) : 0
-        let winRate = coupons.isEmpty ? 0 : Double(wins) / Double(coupons.count)
+        let winRate = Double(won) / Double(coupons.count)
         return .init(
-            settledCount: coupons.count,
-            totalStake: totalStake,
             profit: profit,
             roi: roi,
+            totalStake: totalStake,
+            settledCount: coupons.count,
             winRate: winRate,
             eventWinRate: eventWinRate(for: coupons))
     }
@@ -152,5 +152,113 @@ enum MetricFactory {
             totalOdds: .average(for: coupons) { $0.totalOdds },
             odds: .averageOdds(for: coupons),
             eventCount: .average(for: coupons) { Double($0.events.count) })
+    }
+    
+    static func roi(
+        for coupons: [Coupon],
+        byEventRange eventRange: EventRange
+    ) -> Double {
+        let filtered = coupons.filter {
+            eventRange.matches(count: $0.events.count)
+        }
+        var totalStake = 0
+        var totalWinnings = 0
+        for coupon in filtered {
+            totalWinnings += coupon.winnings
+            totalStake += coupon.stake
+        }
+        return totalStake > 0
+        ? Double(totalWinnings - totalStake) / Double(totalStake)
+        : 0
+    }
+    
+    static func roi(
+        for coupons: [Coupon],
+        byOddsRange oddsRange: OddsRange
+    ) -> Double {
+        let filtered = coupons.filter {
+            oddsRange.matches(odds: $0.totalOdds)
+        }
+        var totalStake = 0
+        var totalWinnings = 0
+        for coupon in filtered {
+            totalWinnings += coupon.winnings
+            totalStake += coupon.stake
+        }
+        return totalStake > 0
+        ? Double(totalWinnings - totalStake) / Double(totalStake)
+        : 0
+    }
+    
+    static func winRate(
+        for coupons: [Coupon],
+        byEventRange eventRange: EventRange
+    ) -> Double {
+        let filtered = coupons.filter {
+            eventRange.matches(count: $0.events.count)
+        }
+        guard !filtered.isEmpty else { return 0 }
+        var wins = 0
+        for coupon in filtered {
+            if coupon.totalStatus == .won {
+                wins += 1
+            }
+        }
+        return Double(wins) / Double(filtered.count)
+    }
+    
+    static func winRate(
+        for coupons: [Coupon],
+        byOddsRange oddsRange: OddsRange
+    ) -> Double {
+        let filtered = coupons.filter {
+            oddsRange.matches(odds: $0.totalOdds)
+        }
+        guard !filtered.isEmpty else { return 0 }
+        var wins = 0
+        for coupon in filtered {
+            if coupon.totalStatus == .won {
+                wins += 1
+            }
+        }
+        return Double(wins) / Double(filtered.count)
+    }
+    
+    static func eventWinRate(
+        for coupons: [Coupon],
+        byEventOddsRange oddsRange: EventOddsRange
+    ) -> Double {
+        var total = 0
+        var won = 0
+        for coupon in coupons {
+            for event in coupon.events {
+                if oddsRange.matches(odds: event.odds) {
+                    total += 1
+                    if event.status == .won {
+                        won += 1
+                    }
+                }
+            }
+        }
+        return total > 0 ? Double(won) / Double(total) : 0
+    }
+    
+    static func eventWinRate(
+        for coupons: [Coupon],
+        bySport sport: Sports
+    ) -> Double {
+        var total = 0
+        var won = 0
+        for coupon in coupons {
+            for event in coupon.events {
+                if event.sport == sport {
+                    total += 1
+                    if event.status == .won {
+                        won += 1
+                    }
+                }
+            }
+        }
+        return total > 0 ? Double(won) / Double(total) : 0
     }
 }

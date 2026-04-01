@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CouponEditorView: View {
     
-    // MARK: - Private Properties
+    // MARK: Private Properties
     @Environment(CouponService.self) private var couponService
     @Environment(\.dismiss) private var dismiss
         
@@ -44,7 +44,7 @@ struct CouponEditorView: View {
         !stake.isEmpty && stake != "0" && !events.isEmpty
     }
     
-    var totalStatus: Statuses {
+    private var totalStatus: Statuses {
         if events.contains(where: { $0.status == .lost }) {
             return .lost
         } else if !events.isEmpty && events.allSatisfy({ $0.status == .won }) {
@@ -54,10 +54,10 @@ struct CouponEditorView: View {
         }
     }
     
-    // MARK: - Public Properties
+    // MARK: Public Properties
     var coupon: Coupon?
     
-    // MARK: - Body
+    // MARK: Body
     var body: some View {
         NavigationStack {
             Form {
@@ -91,7 +91,7 @@ struct CouponEditorView: View {
         }
     }
     
-    // MARK: - Initialize
+    // MARK: Initialize
     init(coupon: Coupon? = nil) {
         self.coupon = coupon
         _selectedDate = State(initialValue: coupon?.timestamp ?? Date())
