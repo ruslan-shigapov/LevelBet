@@ -55,8 +55,8 @@ struct StatisticsView: View {
         List {
             PeriodPicker()
             if !filtered.isEmpty {
-                SummarySection(for: MetricFactory.summary(for: filtered))
-                BreakdownSection(for: MetricFactory.averages(for: filtered))
+                SummarySection(metrics: SummaryFactory.make(for: filtered))
+                BreakdownSection(metrics: AveragesFactory.make(for: filtered))
             }
         }
         .overlay(alignment: .center) {
@@ -98,12 +98,12 @@ private extension StatisticsView {
         .listRowBackground(Color.clear)
     }
     
-    func SummarySection(for metrics: MetricFactory.Summary) -> some View {
+    func SummarySection(metrics: Summary) -> some View {
         Section("Сводка") {
             VStack {
                 Chart {
                     ForEach(sortedDates, id: \.self) {
-                        let profit = MetricFactory.profit(
+                        let profit = ExtraMetricFactory.profit(
                             for: grouped[$0] ?? [])
                         LineMark(
                             x: .value("", $0),
@@ -196,7 +196,7 @@ private extension StatisticsView {
         }
     }
     
-    func BreakdownSection(for metrics: MetricFactory.Averages) -> some View {
+    func BreakdownSection(metrics: Averages) -> some View {
         Section("Средние") {
             AveragesView(
                 title: "Сумма",

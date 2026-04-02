@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E40E72DA2F5ECB260072E057 /* MetricFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40E72D92F5ECB260072E057 /* MetricFactory.swift */; };
+		E40E72DA2F5ECB260072E057 /* ExtraMetricFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40E72D92F5ECB260072E057 /* ExtraMetricFactory.swift */; };
 		E412CF082F7BCFB500F1ED75 /* OddsRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = E412CF072F7BCFB500F1ED75 /* OddsRange.swift */; };
 		E412CF0A2F7BD79500F1ED75 /* WinRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E412CF092F7BD79500F1ED75 /* WinRateView.swift */; };
 		E41DB5EF2F6BFB5000DF71F3 /* AveragesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41DB5EE2F6BFB5000DF71F3 /* AveragesView.swift */; };
@@ -19,6 +19,8 @@
 		E44F95802F4EFAC8001B9E72 /* EventSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44F957F2F4EFAC8001B9E72 /* EventSectionView.swift */; };
 		E44F95842F4F03C0001B9E72 /* MainSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44F95832F4F03C0001B9E72 /* MainSectionView.swift */; };
 		E48AE6292F58364B00E5E80E /* FilterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48AE6282F58364B00E5E80E /* FilterFactory.swift */; };
+		E49C114A2F7E82CE0010A53A /* SummaryFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C11492F7E82CE0010A53A /* SummaryFactory.swift */; };
+		E49C114C2F7E85F40010A53A /* AveragesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C114B2F7E85F40010A53A /* AveragesFactory.swift */; };
 		E49F88A42F28BB0F002F0C6B /* CouponService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49F88A32F28BB0F002F0C6B /* CouponService.swift */; };
 		E49F88A72F28BBA8002F0C6B /* Statuses.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49F88A62F28BBA8002F0C6B /* Statuses.swift */; };
 		E49F88A92F28BBBD002F0C6B /* Periods.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49F88A82F28BBBD002F0C6B /* Periods.swift */; };
@@ -45,7 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E40E72D92F5ECB260072E057 /* MetricFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricFactory.swift; sourceTree = "<group>"; };
+		E40E72D92F5ECB260072E057 /* ExtraMetricFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraMetricFactory.swift; sourceTree = "<group>"; };
 		E412CF072F7BCFB500F1ED75 /* OddsRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OddsRange.swift; sourceTree = "<group>"; };
 		E412CF092F7BD79500F1ED75 /* WinRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinRateView.swift; sourceTree = "<group>"; };
 		E41DB5EE2F6BFB5000DF71F3 /* AveragesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AveragesView.swift; sourceTree = "<group>"; };
@@ -57,6 +59,8 @@
 		E44F957F2F4EFAC8001B9E72 /* EventSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSectionView.swift; sourceTree = "<group>"; };
 		E44F95832F4F03C0001B9E72 /* MainSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSectionView.swift; sourceTree = "<group>"; };
 		E48AE6282F58364B00E5E80E /* FilterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterFactory.swift; sourceTree = "<group>"; };
+		E49C11492F7E82CE0010A53A /* SummaryFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryFactory.swift; sourceTree = "<group>"; };
+		E49C114B2F7E85F40010A53A /* AveragesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AveragesFactory.swift; sourceTree = "<group>"; };
 		E49F88A32F28BB0F002F0C6B /* CouponService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponService.swift; sourceTree = "<group>"; };
 		E49F88A62F28BBA8002F0C6B /* Statuses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statuses.swift; sourceTree = "<group>"; };
 		E49F88A82F28BBBD002F0C6B /* Periods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Periods.swift; sourceTree = "<group>"; };
@@ -117,7 +121,9 @@
 			isa = PBXGroup;
 			children = (
 				E48AE6282F58364B00E5E80E /* FilterFactory.swift */,
-				E40E72D92F5ECB260072E057 /* MetricFactory.swift */,
+				E49C11492F7E82CE0010A53A /* SummaryFactory.swift */,
+				E49C114B2F7E85F40010A53A /* AveragesFactory.swift */,
+				E40E72D92F5ECB260072E057 /* ExtraMetricFactory.swift */,
 			);
 			path = Factories;
 			sourceTree = "<group>";
@@ -383,9 +389,11 @@
 				E44F95802F4EFAC8001B9E72 /* EventSectionView.swift in Sources */,
 				E48AE6292F58364B00E5E80E /* FilterFactory.swift in Sources */,
 				E445F4B12F7D3A7600EB889C /* EventOddsRange.swift in Sources */,
-				E40E72DA2F5ECB260072E057 /* MetricFactory.swift in Sources */,
+				E40E72DA2F5ECB260072E057 /* ExtraMetricFactory.swift in Sources */,
 				E4F985712F1E2587001CB75F /* ResultsView.swift in Sources */,
+				E49C114A2F7E82CE0010A53A /* SummaryFactory.swift in Sources */,
 				E4B427DF2F76725A008B0300 /* Double+Extension.swift in Sources */,
+				E49C114C2F7E85F40010A53A /* AveragesFactory.swift in Sources */,
 				E41DB5EF2F6BFB5000DF71F3 /* AveragesView.swift in Sources */,
 				E4F985662F1E24FE001CB75F /* Coupon.swift in Sources */,
 				E41F1B1F2F51ADA1003F90B8 /* View+Extension.swift in Sources */,

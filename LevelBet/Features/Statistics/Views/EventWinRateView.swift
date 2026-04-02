@@ -27,7 +27,7 @@ struct EventWinRateView: View {
     private func OddsRangeSection() -> some View {
         Section("Диапазон коэф.") {
             ForEach(EventOddsRange.allCases) {
-                let winRate = MetricFactory.eventWinRate(
+                let winRate = ExtraMetricFactory.eventWinRate(
                     for: coupons,
                     byEventOddsRange: $0)
                 if !winRate.isZero {
@@ -40,7 +40,9 @@ struct EventWinRateView: View {
     private func SportsSection() -> some View {
         Section("Виды спорта") {
             ForEach(Sports.allCases) {
-                let winRate = MetricFactory.eventWinRate(for: coupons, bySport: $0)
+                let winRate = ExtraMetricFactory.eventWinRate(
+                    for: coupons,
+                    bySport: $0)
                 if !winRate.isZero {
                     LabeledWinRate(title: $0.rawValue, value: winRate)
                 }

@@ -27,7 +27,7 @@ struct ROIView: View {
     private func EventRangeSection() -> some View {
         Section("Кол-во событий") {
             ForEach(EventRange.allCases) {
-                let roi = MetricFactory.roi(for: coupons, byEventRange: $0)
+                let roi = ExtraMetricFactory.roi(for: coupons, byEventRange: $0)
                 if !roi.isZero {
                     LabeledROI(title: $0.rawValue, value: roi)
                 }
@@ -38,7 +38,7 @@ struct ROIView: View {
     private func OddsRangeSection() -> some View {
         Section("Диапазон коэф.") {
             ForEach(OddsRange.allCases) {
-                let roi = MetricFactory.roi(for: coupons, byOddsRange: $0)
+                let roi = ExtraMetricFactory.roi(for: coupons, byOddsRange: $0)
                 if !roi.isZero {
                     LabeledROI(title: $0.rawValue, value: roi)
                 }

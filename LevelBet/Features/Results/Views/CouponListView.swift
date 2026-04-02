@@ -96,7 +96,7 @@ private extension CouponListView {
     
     func SectionHeader(for date: Date, coupons: [Coupon]) -> some View {
         LabeledContent {
-            ProfitText(MetricFactory.profit(for: coupons))
+            ProfitText(ExtraMetricFactory.profit(for: coupons))
         } label: {
             Text(date, format: .dateTime.weekday(.wide).day().month())
         }
