@@ -35,7 +35,7 @@ private enum Tabs: String, CaseIterable, Identifiable {
 
 struct ContentView: View {
 
-    @State private var selectedTab: Tabs = .statistics
+    @State private var selectedTab: Tabs = .profile
     
     var body: some View {
         TabView(selection: $selectedTab) {

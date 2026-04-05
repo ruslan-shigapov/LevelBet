@@ -7,17 +7,18 @@
 
 import SwiftUI
 import SwiftData
-import Charts
 
 struct StatisticsView: View {
     
+    // MARK: Private Properties
     @Query private var coupons: [Coupon]
+    
+    @State private var selectedPeriod: Periods = .week
     
     @State private var isInfoPresented = false
     @State private var isROIViewPresented = false
     @State private var isWinRateViewPresented = false
     @State private var isEventWinRateViewPresented = false
-    @State private var selectedPeriod: Periods = .week
     
     @ToolbarContentBuilder
     private var toolbarContent: some ToolbarContent {
@@ -34,29 +35,19 @@ struct StatisticsView: View {
         }
     }
     
-    private var grouped: [Date: [Coupon]] {
-        let calendar = Calendar.current
-        return Dictionary(grouping: filtered) {
-            let date = $0.timestamp
-            return selectedPeriod == .year
-            ? calendar.date(
-                from: calendar.dateComponents(
-                    [.year, .month],
-                    from: date)) ?? date
-            : calendar.startOfDay(for: date)
-        }
-    }
-    
-    private var sortedDates: [Date] {
-        grouped.keys.sorted()
-    }
-    
+    // MARK: Body
     var body: some View {
         List {
             PeriodPicker()
             if !filtered.isEmpty {
-                SummarySection(metrics: SummaryFactory.make(for: filtered))
-                BreakdownSection(metrics: AveragesFactory.make(for: filtered))
+                SummarySectionView(
+                    filtered: filtered,
+                    selectedPeriod: $selectedPeriod,
+                    isROIViewPresented: $isROIViewPresented,
+                    isWinRateViewPresented: $isWinRateViewPresented,
+                    isEventWinRateViewPresented: $isEventWinRateViewPresented)
+                AveragesSectionView(
+                    metrics: AveragesFactory.make(for: filtered))
             }
         }
         .overlay(alignment: .center) {
@@ -68,23 +59,24 @@ struct StatisticsView: View {
         .toolbar { toolbarContent }
         .sheet(isPresented: $isInfoPresented) {}
         .sheet(isPresented: $isROIViewPresented) {
-            ROIView(coupons: filtered)
-                .presentationDetents([.medium, .large])
-                .presentationDragIndicator(.visible)
+            ModalMetricView(
+                title: "Детальный ROI",
+                content: ROIListView(coupons: filtered))
         }
         .sheet(isPresented: $isWinRateViewPresented) {
-            WinRateView(coupons: filtered)
-                .presentationDetents([.medium, .large])
-                .presentationDragIndicator(.visible)
+            ModalMetricView(
+                title: "Детальный винрейт (купоны)",
+                content: WinRateListView(coupons: filtered))
         }
         .sheet(isPresented: $isEventWinRateViewPresented) {
-            EventWinRateView(coupons: filtered)
-                .presentationDetents([.medium, .large])
-                .presentationDragIndicator(.visible)
+            ModalMetricView(
+                title: "Детальный винрейт (события)",
+                content: EventWinRateListView(coupons: filtered))
         }
     }
 }
 
+// MARK: - Views
 private extension StatisticsView {
     
     func PeriodPicker() -> some View {
@@ -98,135 +90,6 @@ private extension StatisticsView {
         .listRowBackground(Color.clear)
     }
     
-    func SummarySection(metrics: Summary) -> some View {
-        Section("Сводка") {
-            VStack {
-                Chart {
-                    ForEach(sortedDates, id: \.self) {
-                        let profit = ExtraMetricFactory.profit(
-                            for: grouped[$0] ?? [])
-                        LineMark(
-                            x: .value("", $0),
-                            y: .value("",profit))
-                        .foregroundStyle(.white.opacity(0.4))
-                        PointMark(
-                            x: .value("", $0),
-                            y: .value("",profit))
-                        .foregroundStyle(profit > 0 ? .green : .red)
-                    }
-                }
-                .chartXAxis {
-                    AxisMarks(values: sortedDates) {
-                        AxisGridLine()
-                        AxisValueLabel(
-                            format: selectedPeriod == .year
-                            ? .dateTime.month(.abbreviated)
-                            : .dateTime.day())
-                    }
-                }
-                .padding(Layouts.smallOffset)
-                LabeledContent("Профит") {
-                    Text(metrics.profit.formatted())
-                        .foregroundStyle(
-                            metrics.profit < 0
-                            ? .red
-                            : metrics.profit > 0 ? .green : .secondary)
-                }
-            }
-            LabeledContent {
-                Text(metrics.roi.fractionFormatted)
-                    .foregroundStyle(
-                        metrics.roi < 0
-                        ? .red
-                        : metrics.roi > 0 ? .green : .secondary)
-            } label: {
-                HStack {
-                    Text("ROI")
-                    Image(systemName: "chevron.right")
-                        .imageScale(.small)
-                        .foregroundStyle(Color.accentColor)
-                }
-            }
-            .contentShape(.rect)
-            .onTapGesture {
-                isROIViewPresented = true
-            }
-            LabeledContent(
-                "Общая сумма",
-                value: metrics.totalStake.formatted())
-            LabeledContent(
-                "Расчитанные купоны",
-                value: metrics.settledCount.formatted())
-            LabeledContent {
-                Text(metrics.winRate.fractionFormatted)
-            } label: {
-                HStack {
-                    Text("Винрейт (купоны)")
-                    if !metrics.winRate.isZero {
-                        Image(systemName: "chevron.right")
-                            .imageScale(.small)
-                            .foregroundStyle(Color.accentColor)
-                    }
-                }
-            }
-            .contentShape(.rect)
-            .onTapGesture {
-                if !metrics.winRate.isZero {
-                    isWinRateViewPresented = true
-                }
-            }
-            LabeledContent {
-                Text(metrics.eventWinRate.fractionFormatted)
-            } label: {
-                HStack {
-                    Text("Винрейт (события)")
-                    if !metrics.eventWinRate.isZero {
-                        Image(systemName: "chevron.right")
-                            .imageScale(.small)
-                            .foregroundStyle(Color.accentColor)
-                    }
-                }
-            }
-            .contentShape(.rect)
-            .onTapGesture {
-                if !metrics.eventWinRate.isZero {
-                    isEventWinRateViewPresented = true
-                }
-            }
-        }
-    }
-    
-    func BreakdownSection(metrics: Averages) -> some View {
-        Section("Средние") {
-            AveragesView(
-                title: "Сумма",
-                overall: metrics.stake.overall
-                    .formatted(.number.precision(.fractionLength(0))),
-                won: metrics.stake.won
-                    .formatted(.number.precision(.fractionLength(0))),
-                lost: metrics.stake.lost
-                    .formatted(.number.precision(.fractionLength(0))))
-            AveragesView(
-                title: "Коэф. купона",
-                overall: metrics.totalOdds.overall.oddsFormatted,
-                won: metrics.totalOdds.won.oddsFormatted,
-                lost: metrics.totalOdds.lost.oddsFormatted)
-            AveragesView(
-                title: "Коэф. события",
-                overall: metrics.odds.overall.oddsFormatted,
-                won: metrics.odds.won.oddsFormatted,
-                lost: metrics.odds.lost.oddsFormatted)
-            AveragesView(
-                title: "Кол-во событий",
-                overall: metrics.eventCount.overall
-                    .formatted(.number.precision(.fractionLength(0...1))),
-                won: metrics.eventCount.won
-                    .formatted(.number.precision(.fractionLength(0...1))),
-                lost: metrics.eventCount.lost
-                    .formatted(.number.precision(.fractionLength(0...1))))
-        }
-    }
-    
     func EmptyState() -> some View {
         ContentUnavailableView {
             Label {
@@ -235,14 +98,9 @@ private extension StatisticsView {
                 Image(systemName: "graph.2d")
             }
         } description: {
-            Text("Добавь рассчитанные купоны или попробуй выбрать другой период.")
+            Text("""
+            Добавь рассчитанные купоны или попробуй выбрать другой период.
+            """)
         }
     }
-}
-
-#Preview {
-    let container = try! ModelContainer(for: Coupon.self, Event.self)
-    ContentView()
-        .modelContainer(container)
-        .environment(CouponService(context: container.mainContext))
 }

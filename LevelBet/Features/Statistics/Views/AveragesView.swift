@@ -19,9 +19,10 @@ struct AveragesView: View {
     var body: some View {
         VStack(spacing: Layouts.smallOffset) {
             HStack {
-                Image(systemName: isExpanded ? "chevron.down" : "chevron.right")
-                    .imageScale(.small)
-                    .foregroundStyle(.secondary)
+                Image(
+                    systemName: isExpanded ? "chevron.down" : "chevron.right")
+                .imageScale(.small)
+                .foregroundStyle(.secondary)
                 LabeledContent(title, value: overall)
             }
             if isExpanded {

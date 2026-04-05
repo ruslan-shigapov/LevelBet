@@ -6,14 +6,21 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ProfileView: View {
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            
+        }
+        .background(Color.lightMidnight)
     }
 }
 
 #Preview {
-    ProfileView()
+    let container = try! ModelContainer(for: Coupon.self, Event.self)
+    ContentView()
+        .modelContainer(container)
+        .environment(CouponService(context: container.mainContext))
 }

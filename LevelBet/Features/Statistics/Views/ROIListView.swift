@@ -1,30 +1,27 @@
 //
-//  ROIView.swift
+//  ROIListView.swift
 //  LevelBet
 //
-//  Created by Ruslan Shigapov on 25.03.2026.
+//  Created by Ruslan Shigapov on 05.04.2026.
 //
 
 import SwiftUI
 
-struct ROIView: View {
+struct ROIListView: View {
     
     let coupons: [Coupon]
     
     var body: some View {
-        NavigationStack {
-            List {
-                EventRangeSection()
-                OddsRangeSection()
-            }
-            .background(Color.midnight)
-            .scrollContentBackground(.hidden)
-            .navigationTitle("Детальный ROI")
-            .navigationBarTitleDisplayMode(.inline)
+        List {
+            EventRangeSection()
+            OddsRangeSection()
         }
     }
+}
+
+private extension ROIListView {
     
-    private func EventRangeSection() -> some View {
+    func EventRangeSection() -> some View {
         Section("Кол-во событий") {
             ForEach(EventRange.allCases) {
                 let roi = ExtraMetricFactory.roi(for: coupons, byEventRange: $0)
@@ -35,7 +32,7 @@ struct ROIView: View {
         }
     }
     
-    private func OddsRangeSection() -> some View {
+    func OddsRangeSection() -> some View {
         Section("Диапазон коэф.") {
             ForEach(OddsRange.allCases) {
                 let roi = ExtraMetricFactory.roi(for: coupons, byOddsRange: $0)
@@ -46,7 +43,7 @@ struct ROIView: View {
         }
     }
     
-    private func LabeledROI(title: String, value: Double) -> some View {
+    func LabeledROI(title: String, value: Double) -> some View {
         LabeledContent(title) {
             Text(value.fractionFormatted)
                 .foregroundStyle(value < 0 ? .red : .green)
