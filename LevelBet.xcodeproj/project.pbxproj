@@ -38,6 +38,7 @@
 		E4A8F3732F2785740084311F /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A8F3722F2785740084311F /* Event.swift */; };
 		E4A8F3762F2785AD0084311F /* Sports.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A8F3752F2785AD0084311F /* Sports.swift */; };
 		E4B427DF2F76725A008B0300 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B427DE2F76725A008B0300 /* Double+Extension.swift */; };
+		E4B6F4FD2F864DD100A34F2D /* HighlightsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B6F4FC2F864DD100A34F2D /* HighlightsFactory.swift */; };
 		E4F24B982F4D9F0900DC2252 /* FilterMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F24B972F4D9F0900DC2252 /* FilterMenu.swift */; };
 		E4F24B9C2F4DA6B300DC2252 /* AddEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F24B9B2F4DA6B300DC2252 /* AddEventView.swift */; };
 		E4F5865A2F559747009BD445 /* DeleteSwipeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F586592F559747009BD445 /* DeleteSwipeButton.swift */; };
@@ -82,6 +83,7 @@
 		E4A8F3722F2785740084311F /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		E4A8F3752F2785AD0084311F /* Sports.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sports.swift; sourceTree = "<group>"; };
 		E4B427DE2F76725A008B0300 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
+		E4B6F4FC2F864DD100A34F2D /* HighlightsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightsFactory.swift; sourceTree = "<group>"; };
 		E4F24B972F4D9F0900DC2252 /* FilterMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterMenu.swift; sourceTree = "<group>"; };
 		E4F24B9B2F4DA6B300DC2252 /* AddEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventView.swift; sourceTree = "<group>"; };
 		E4F586592F559747009BD445 /* DeleteSwipeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteSwipeButton.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				E49C11492F7E82CE0010A53A /* SummaryFactory.swift */,
 				E49C114B2F7E85F40010A53A /* AveragesFactory.swift */,
 				E40E72D92F5ECB260072E057 /* ExtraMetricFactory.swift */,
+				E4B6F4FC2F864DD100A34F2D /* HighlightsFactory.swift */,
 			);
 			path = Factories;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 				E40E72DA2F5ECB260072E057 /* ExtraMetricFactory.swift in Sources */,
 				E4F985712F1E2587001CB75F /* ResultsView.swift in Sources */,
 				E49C114A2F7E82CE0010A53A /* SummaryFactory.swift in Sources */,
+				E4B6F4FD2F864DD100A34F2D /* HighlightsFactory.swift in Sources */,
 				E4B427DF2F76725A008B0300 /* Double+Extension.swift in Sources */,
 				E49C114C2F7E85F40010A53A /* AveragesFactory.swift in Sources */,
 				E41DB5EF2F6BFB5000DF71F3 /* AveragesView.swift in Sources */,

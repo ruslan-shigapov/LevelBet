@@ -79,7 +79,7 @@ struct Averages {
     let eventCount: Value
 }
 
-struct AveragesFactory {
+enum AveragesFactory {
     
     static func make(for coupons: [Coupon]) -> Averages {
         .init(
