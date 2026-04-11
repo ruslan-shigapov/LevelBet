@@ -22,8 +22,8 @@ enum ExtraMetricFactory {
         : 0
     }
     
-    private static func winRate(for coupons: [Coupon]) -> Double {
-        guard !coupons.isEmpty else { return 0 }
+    private static func winRate(for coupons: [Coupon]) -> Double? {
+        guard !coupons.isEmpty else { return nil }
         var wins = 0
         for coupon in coupons {
             if coupon.totalStatus == .won {
@@ -69,7 +69,7 @@ enum ExtraMetricFactory {
     static func winRate(
         for coupons: [Coupon],
         byEventRange eventRange: EventRange
-    ) -> Double {
+    ) -> Double? {
         let filtered = coupons.filter {
             eventRange.matches(count: $0.events.count)
         }
@@ -79,7 +79,7 @@ enum ExtraMetricFactory {
     static func winRate(
         for coupons: [Coupon],
         byOddsRange oddsRange: OddsRange
-    ) -> Double {
+    ) -> Double? {
         let filtered = coupons.filter {
             oddsRange.matches(odds: $0.totalOdds)
         }
@@ -89,7 +89,7 @@ enum ExtraMetricFactory {
     static func eventWinRate(
         for coupons: [Coupon],
         byEventOddsRange oddsRange: EventOddsRange
-    ) -> Double {
+    ) -> Double? {
         var total = 0
         var won = 0
         for coupon in coupons {
@@ -102,13 +102,13 @@ enum ExtraMetricFactory {
                 }
             }
         }
-        return total > 0 ? Double(won) / Double(total) : 0
+        return total > 0 ? Double(won) / Double(total) : nil
     }
     
     static func eventWinRate(
         for coupons: [Coupon],
         bySport sport: Sports
-    ) -> Double {
+    ) -> Double? {
         var total = 0
         var won = 0
         for coupon in coupons {
@@ -121,6 +121,6 @@ enum ExtraMetricFactory {
                 }
             }
         }
-        return total > 0 ? Double(won) / Double(total) : 0
+        return total > 0 ? Double(won) / Double(total) : nil
     }
 }

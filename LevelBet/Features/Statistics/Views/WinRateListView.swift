@@ -27,7 +27,7 @@ private extension WinRateListView {
                 let winRate = ExtraMetricFactory.winRate(
                     for: coupons,
                     byEventRange: $0)
-                if !winRate.isZero {
+                if let winRate {
                     LabeledWinRateView(title: $0.rawValue, value: winRate)
                 }
             }
@@ -40,7 +40,7 @@ private extension WinRateListView {
                 let winRate = ExtraMetricFactory.winRate(
                     for: coupons,
                     byOddsRange: $0)
-                if !winRate.isZero {
+                if let winRate {
                     LabeledWinRateView(title: $0.rawValue, value: winRate)
                 }
             }

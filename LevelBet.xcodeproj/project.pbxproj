@@ -116,8 +116,8 @@
 				E41DB5EE2F6BFB5000DF71F3 /* AveragesView.swift */,
 				E475499A2F82812200389011 /* ModalMetricView.swift */,
 				E47549A02F82834300389011 /* ROIListView.swift */,
-				E412CF092F7BD79500F1ED75 /* WinRateListView.swift */,
 				E47549A22F8287E800389011 /* LabeledWinRateView.swift */,
+				E412CF092F7BD79500F1ED75 /* WinRateListView.swift */,
 				E445F4AE2F7D2C4C00EB889C /* EventWinRateListView.swift */,
 			);
 			path = Views;

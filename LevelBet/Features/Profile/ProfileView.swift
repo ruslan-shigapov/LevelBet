@@ -10,12 +10,18 @@ import SwiftData
 
 struct ProfileView: View {
         
-    @Query private var coupons: [Coupon]
+    @Query(sort: \Coupon.timestamp) private var coupons: [Coupon]
+    
+    private var filtered: [Coupon] {
+        coupons.filter {
+            FilterFactory.matches(coupon: $0, period: .year)
+        }
+    }
     
     var body: some View {
         List {
             Section("Банк") {}
-            CuriousSection(metrics: HighlightsFactory.make(for: coupons))
+            CuriousSection(metrics: HighlightsFactory.make(for: filtered))
         }
         .background(Color.lightMidnight)
     }
@@ -27,7 +33,7 @@ struct ProfileView: View {
             ) {
                 CuriousCard(
                     title: "Макс. результаты",
-                    firstLabel: "Выигрыш",
+                    firstLabel: "Чист. выигр.",
                     firstValue: metrics.biggestWin.formatted(),
                     secondLabel: "Проигрыш",
                     secondValue: metrics.biggestLoss.formatted())
@@ -40,21 +46,23 @@ struct ProfileView: View {
                 CuriousCard(
                     title: "Коэф. купонов",
                     firstLabel: "Макс. выигр.",
-                    firstValue: metrics.biggestWinningOdds.formatted(),
+                    firstValue: metrics.biggestWinningOdds.oddsFormatted,
                     secondLabel: "Мин. проигр.",
-                    secondValue: metrics.smallestLosingOdds.formatted())
+                    secondValue: metrics.smallestLosingOdds.oddsFormatted)
                 CuriousCard(
                     title: "Коэф. событий",
                     firstLabel: "Макс. выигр.",
-                    firstValue: metrics.biggestWinningEventOdds.formatted(),
+                    firstValue: metrics.biggestWinningEventOdds.oddsFormatted,
                     secondLabel: "Мин. проигр.",
-                    secondValue: metrics.smallestLosingEventOdds.formatted())
+                    secondValue: metrics.smallestLosingEventOdds.oddsFormatted)
                 CuriousCard(
                     title: "Кол-во купонов",
-                    firstLabel: "В ср. в день",
-                    firstValue: metrics.averageCouponCountPerDay.formatted(),
-                    secondLabel: "В ср. в неделю",
-                    secondValue: metrics.averageCouponCountPerWeek.formatted())
+                    firstLabel: "Средн. в день",
+                    firstValue: metrics.averageCouponCountPerDay
+                        .formatted(.number.precision(.fractionLength(0...1))),
+                    secondLabel: "Средн. в неделю",
+                    secondValue: metrics.averageCouponCountPerWeek
+                        .formatted(.number.precision(.fractionLength(0...1))))
                 CuriousCard(
                     title: "Макс. серии дней",
                     firstLabel: "Активных",
@@ -74,15 +82,15 @@ struct ProfileView: View {
                     secondLabel: "Худший",
                     secondValue: metrics.worstMonth)
                 CuriousCard(
-                    title: "Самый длинный экспресс",
-                    firstLabel: "Выигрышный",
+                    title: "Самый длинный выигр. экспресс",
+                    firstLabel: "Событий",
                     firstValue: metrics.biggestWinningEventCount.formatted(),
                     secondLabel: "",
                     secondValue: "")
                 CuriousCard(
-                    title: "Самый частый вид спорта",
-                    firstLabel: "Выигрышный",
-                    firstValue: metrics.mostFrequencySport,
+                    title: "Самый выигр. вид спорта",
+                    firstLabel: "",
+                    firstValue: metrics.mostFrequencyWinningSport,
                     secondLabel: "",
                     secondValue: "")
             }

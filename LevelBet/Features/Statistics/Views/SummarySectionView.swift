@@ -105,10 +105,7 @@ private extension SummarySectionView {
                     ? .red
                     : metrics.roi > 0 ? .green : .secondary)
         } label: {
-            HStack {
-                Text("ROI")
-                ChevronImage()
-            }
+            ChevronLabel(title: "ROI")
         }
         .contentShape(.rect)
         .onTapGesture {
@@ -116,10 +113,13 @@ private extension SummarySectionView {
         }
     }
     
-    func ChevronImage() -> some View {
-        Image(systemName: "chevron.right")
-            .imageScale(.small)
-            .foregroundStyle(Color.accentColor)
+    func ChevronLabel(title: String) -> some View {
+        HStack {
+            Text(title)
+            Image(systemName: "chevron.right")
+                .imageScale(.small)
+                .foregroundStyle(Color.accentColor)
+        }
     }
     
     func WinRateRow(
@@ -130,17 +130,11 @@ private extension SummarySectionView {
         LabeledContent {
             Text(value.fractionFormatted)
         } label: {
-            HStack {
-                Text(title)
-                ChevronImage()
-                    .opacity(!value.isZero ? 1 : 0)
-            }
+            ChevronLabel(title: title)
         }
         .contentShape(.rect)
         .onTapGesture {
-            if !value.isZero {
-                isModalViewPresented.wrappedValue = true
-            }
+            isModalViewPresented.wrappedValue = true
         }
     }
 }
