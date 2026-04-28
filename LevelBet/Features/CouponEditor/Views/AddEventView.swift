@@ -64,6 +64,14 @@ struct AddEventView: View {
         }
     }
     
+    init(onAdd: @escaping (Event) -> Void) {
+        self.onAdd = onAdd
+        let defaultSportValue = UserDefaults.standard.string(
+            forKey: "defaultSport")
+        let defaultSport = Sports(rawValue: defaultSportValue ?? "")
+        _selectedSport = State(initialValue: defaultSport ?? .football)
+    }
+    
     // MARK: Private Methods 
     private func addEvent() {
         let event = Event(sport: selectedSport, odds: formatted ?? 0)

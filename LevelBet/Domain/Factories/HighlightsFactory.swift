@@ -30,6 +30,7 @@ struct Highlights {
 
 enum HighlightsFactory {
     
+    // MARK: Private Methods
     private static func marginalValues(
         from groupedProfits: [Int: Int]
     ) -> (best: Int?, worst: Int?) {
@@ -81,6 +82,7 @@ enum HighlightsFactory {
         return (longestActiveStreak, longestInactiveStreak)
     }
     
+    // MARK: Public Methods
     static func make(for coupons: [Coupon]) -> Highlights {
         guard !coupons.isEmpty else {
             return .init(

@@ -10,6 +10,7 @@
 		E40E72DA2F5ECB260072E057 /* ExtraMetricFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40E72D92F5ECB260072E057 /* ExtraMetricFactory.swift */; };
 		E412CF082F7BCFB500F1ED75 /* OddsRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = E412CF072F7BCFB500F1ED75 /* OddsRange.swift */; };
 		E412CF0A2F7BD79500F1ED75 /* WinRateListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E412CF092F7BD79500F1ED75 /* WinRateListView.swift */; };
+		E41D22662F9F8E370041456D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41D22652F9F8E370041456D /* SettingsView.swift */; };
 		E41DB5EF2F6BFB5000DF71F3 /* AveragesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41DB5EE2F6BFB5000DF71F3 /* AveragesView.swift */; };
 		E41F1B192F518CE7003F90B8 /* Layouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41F1B182F518CE7003F90B8 /* Layouts.swift */; };
 		E41F1B1F2F51ADA1003F90B8 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41F1B1E2F51ADA1003F90B8 /* View+Extension.swift */; };
@@ -55,6 +56,7 @@
 		E40E72D92F5ECB260072E057 /* ExtraMetricFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraMetricFactory.swift; sourceTree = "<group>"; };
 		E412CF072F7BCFB500F1ED75 /* OddsRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OddsRange.swift; sourceTree = "<group>"; };
 		E412CF092F7BD79500F1ED75 /* WinRateListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinRateListView.swift; sourceTree = "<group>"; };
+		E41D22652F9F8E370041456D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		E41DB5EE2F6BFB5000DF71F3 /* AveragesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AveragesView.swift; sourceTree = "<group>"; };
 		E41F1B182F518CE7003F90B8 /* Layouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layouts.swift; sourceTree = "<group>"; };
 		E41F1B1E2F51ADA1003F90B8 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 			isa = PBXGroup;
 			children = (
 				E4F985742F1E259A001CB75F /* ProfileView.swift */,
+				E41D22652F9F8E370041456D /* SettingsView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				E4A6869F2F7A920300598B10 /* EventRange.swift in Sources */,
 				E4F24B982F4D9F0900DC2252 /* FilterMenu.swift in Sources */,
 				E412CF0A2F7BD79500F1ED75 /* WinRateListView.swift in Sources */,
+				E41D22662F9F8E370041456D /* SettingsView.swift in Sources */,
 				E4F985752F1E259A001CB75F /* ProfileView.swift in Sources */,
 				E475499B2F82812200389011 /* ModalMetricView.swift in Sources */,
 				E47549A12F82834300389011 /* ROIListView.swift in Sources */,
