@@ -9,13 +9,14 @@ import SwiftData
 import Foundation
 
 enum DataError: Error {
-    case createFailure, updateFailure, deleteFailure
+    case createFailure, updateFailure, deleteFailure, deleteAllFailure
     
     var description: String {
         switch self {
         case .createFailure: "Не удалось создать купон."
         case .updateFailure: "Не удалось изменить купон."
         case .deleteFailure: "Не удалось удалить купон."
+        case .deleteAllFailure: "Не удалось очистить историю."
         }
     }
 }
@@ -30,6 +31,21 @@ final class CouponService {
         self.context = context
     }
     
+    // MARK: - Private Methods
+    private func merge(newDate: Date, keepingTimeFrom oldDate: Date) -> Date {
+        let calendar = Calendar.current
+        let time = calendar.dateComponents(
+            [.hour, .minute, .second],
+            from: oldDate)
+        let date = calendar.date(
+            bySettingHour: time.hour ?? 0,
+            minute: time.minute ?? 0,
+            second: time.second ?? 0,
+            of: newDate)
+        return date ?? newDate
+    }
+    
+    // MARK: - Public Methods
     func createCoupon(
         date: Date,
         stake: String,
@@ -81,16 +97,12 @@ final class CouponService {
         }
     }
     
-    private func merge(newDate: Date, keepingTimeFrom oldDate: Date) -> Date {
-        let calendar = Calendar.current
-        let time = calendar.dateComponents(
-            [.hour, .minute, .second],
-            from: oldDate)
-        let date = calendar.date(
-            bySettingHour: time.hour ?? 0,
-            minute: time.minute ?? 0,
-            second: time.second ?? 0,
-            of: newDate)
-        return date ?? newDate
+    func deleteAll() throws {
+        do {
+            try context.delete(model: Coupon.self)
+            try context.save()
+        } catch {
+            throw DataError.deleteAllFailure
+        }
     }
 }

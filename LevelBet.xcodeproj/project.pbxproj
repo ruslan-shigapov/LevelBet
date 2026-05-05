@@ -53,6 +53,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E40116D42FA20E7A000B4878 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E40E72D92F5ECB260072E057 /* ExtraMetricFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraMetricFactory.swift; sourceTree = "<group>"; };
 		E412CF072F7BCFB500F1ED75 /* OddsRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OddsRange.swift; sourceTree = "<group>"; };
 		E412CF092F7BD79500F1ED75 /* WinRateListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinRateListView.swift; sourceTree = "<group>"; };
@@ -225,6 +226,13 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		E4F47C502FA8A935001845A8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		E4F985472F1E24D5001CB75F = {
 			isa = PBXGroup;
 			children = (
@@ -286,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				E4F985602F1E24FE001CB75F /* Assets.xcassets */,
+				E40116D42FA20E7A000B4878 /* Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -322,6 +331,7 @@
 		E4F985782F1E25AE001CB75F /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				E4F47C502FA8A935001845A8 /* Views */,
 				E4F985742F1E259A001CB75F /* ProfileView.swift */,
 				E41D22652F9F8E370041456D /* SettingsView.swift */,
 			);
@@ -581,7 +591,9 @@
 				DEVELOPMENT_TEAM = X7QDNJU74Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LevelBet/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Level Bet";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Face ID используется для защиты доступа к приложению.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -619,7 +631,9 @@
 				DEVELOPMENT_TEAM = X7QDNJU74Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LevelBet/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Level Bet";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Face ID используется для защиты доступа к приложению.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

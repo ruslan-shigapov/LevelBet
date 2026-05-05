@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import LocalAuthentication
 
 private enum Tabs: String, CaseIterable, Identifiable {
     
@@ -35,6 +36,8 @@ private enum Tabs: String, CaseIterable, Identifiable {
 
 struct ContentView: View {
 
+    @AppStorage("isFaceIDEnabled") private var isFaceIDEnabled = false
+    
     @State private var selectedTab: Tabs = .profile
     
     var body: some View {
@@ -48,6 +51,25 @@ struct ContentView: View {
                 }
                 .tabItem {
                     Label(tab.rawValue, systemImage: tab.imageName)
+                }
+            }
+        }
+        .onAppear {
+            if isFaceIDEnabled {
+                authenticate()
+            }
+        }
+    }
+    
+    private func authenticate() {
+        let context = LAContext()
+        context.evaluatePolicy(
+            .deviceOwnerAuthenticationWithBiometrics,
+            localizedReason: "Разблокируйте приложние."
+        ) { success, _ in
+            Task { @MainActor in
+                if success {
+                    isFaceIDEnabled = true
                 }
             }
         }

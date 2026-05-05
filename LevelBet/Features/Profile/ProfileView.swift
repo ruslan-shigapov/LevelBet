@@ -31,7 +31,6 @@ struct ProfileView: View {
     
     var body: some View {
         List {
-            Section("Банк") {}
             CuriousSection(metrics: HighlightsFactory.make(for: filtered))
         }
         .background(Color.lightMidnight)
@@ -44,28 +43,28 @@ struct ProfileView: View {
                 columns: [GridItem(.flexible()), GridItem(.flexible())]
             ) {
                 CuriousCard(
-                    title: "Макс. результаты",
+                    title: "max результаты",
                     firstLabel: "Чист. выигр.",
                     firstValue: metrics.biggestWin.formatted(),
                     secondLabel: "Проигрыш",
                     secondValue: metrics.biggestLoss.formatted())
                 CuriousCard(
-                    title: "Макс. серии",
+                    title: "max серии",
                     firstLabel: "Выигрышей",
                     firstValue: metrics.longestWinStreak.formatted(),
                     secondLabel: "Проигрышей",
                     secondValue: metrics.longestLossStreak.formatted())
                 CuriousCard(
                     title: "Коэф. купонов",
-                    firstLabel: "Макс. выигр.",
+                    firstLabel: "max выигр.",
                     firstValue: metrics.biggestWinningOdds.oddsFormatted,
-                    secondLabel: "Мин. проигр.",
+                    secondLabel: "min проигр.",
                     secondValue: metrics.smallestLosingOdds.oddsFormatted)
                 CuriousCard(
                     title: "Коэф. событий",
-                    firstLabel: "Макс. выигр.",
+                    firstLabel: "max выигр.",
                     firstValue: metrics.biggestWinningEventOdds.oddsFormatted,
-                    secondLabel: "Мин. проигр.",
+                    secondLabel: "min проигр.",
                     secondValue: metrics.smallestLosingEventOdds.oddsFormatted)
                 CuriousCard(
                     title: "Кол-во купонов",
@@ -76,7 +75,7 @@ struct ProfileView: View {
                     secondValue: metrics.averageCouponCountPerWeek
                         .formatted(.number.precision(.fractionLength(0...1))))
                 CuriousCard(
-                    title: "Макс. серии дней",
+                    title: "max серии дней",
                     firstLabel: "Активных",
                     firstValue: metrics.longestActiveStreak.formatted(),
                     secondLabel: "Неактивных",

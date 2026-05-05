@@ -92,7 +92,7 @@ private extension MainSectionView {
     }
     
     func LabeledTotalOdds() -> some View {
-        LabeledContent("Общий коэффициент") {
+        LabeledContent("Общий коэф.") {
             Text(totalOdds.oddsFormatted)
                 .monospaced()
                 .frame(width: 140, alignment: .trailing)
@@ -101,9 +101,7 @@ private extension MainSectionView {
     }
     
     func LabeledWinnings() -> some View {
-        LabeledContent(
-            "В" + (totalStatus == .pending ? "озможный в" : "") + "ыигрыш"
-        ) {
+        LabeledContent("Выигрыш") {
             Text(
                 totalStatus != .lost ?
                 Int(calculateWinnings()).formatted()

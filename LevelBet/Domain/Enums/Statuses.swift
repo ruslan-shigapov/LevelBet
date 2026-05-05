@@ -7,7 +7,7 @@
 
 enum Statuses: String, Codable, CaseIterable, Identifiable {
     
-    case all = "Все купоны"
+    case all = "Все"
     case pending = "Ожидаются"
     case won = "Выиграные"
     case lost = "Проиграные"
