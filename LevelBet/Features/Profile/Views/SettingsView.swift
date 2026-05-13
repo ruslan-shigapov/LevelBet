@@ -6,11 +6,11 @@
 //
 
 import SwiftUI
-import SwiftData
 import LocalAuthentication
 
 struct SettingsView: View {
     
+    // MARK: Private Properties
     @Environment(CouponService.self) private var couponService
     
     @AppStorage("defaultSport")
@@ -21,33 +21,15 @@ struct SettingsView: View {
     @State private var isErrorAlertPresented = false
     @State private var alertMessage: String?
     
+    // MARK: Body
     var body: some View {
         Form {
-            Section("Главное") {
-                Picker("Вид спорта по умолч.", selection: $defaultSport) {
-                    ForEach(Sports.allCases) {
-                        Text($0.rawValue)
-                            .tag($0.rawValue)
-                    }
-                }
-                Toggle("Вход по Face ID", isOn: $isFaceIDEnabled)
-                    .onChange(of: isFaceIDEnabled) {
-                        if $1 {
-                            enableFaceID()
-                        }
-                    }
-                LabeledContent("Версия приложения") {
-                    Text("1.0")
-                }
-            }
-            Section("Данные") {
-                Button("Очистить всю историю") {
-                    isAlertPresented = true
-                }
-                .foregroundStyle(.red)
-            }
+            MainSection()
+            DataSection()
         }
         .navigationTitle("Настройки")
+        .scrollContentBackground(.hidden)
+        .background(Color.lightMidnight)
         .alert("Вы уверены?", isPresented: $isAlertPresented) {
             Button("Нет", role: .cancel) {}
             Button("Да", role: .destructive) {
@@ -66,6 +48,7 @@ struct SettingsView: View {
             isPresented: $isErrorAlertPresented)
     }
     
+    // MARK: Private Methods
     private func enableFaceID() {
         let context = LAContext()
         var error: NSError?
@@ -81,17 +64,41 @@ struct SettingsView: View {
             localizedReason: "Подтвердите вход по Face ID."
         ) { success, _ in
             Task { @MainActor in
-                if success {
-                    isFaceIDEnabled = true
-                }
+                isFaceIDEnabled = success
             }
         }
     }
 }
 
-#Preview {
-    let container = try! ModelContainer(for: Coupon.self, Event.self)
-    SettingsView()
-        .modelContainer(container)
-        .environment(CouponService(context: container.mainContext))
+// MARK: - Views
+private extension SettingsView {
+    
+    func MainSection() -> some View {
+        Section("Главное") {
+            Picker("Вид спорта по умолч.", selection: $defaultSport) {
+                ForEach(Sports.allCases) {
+                    Text($0.rawValue)
+                        .tag($0.rawValue)
+                }
+            }
+            Toggle("Вход по Face ID", isOn: $isFaceIDEnabled)
+                .onChange(of: isFaceIDEnabled) {
+                    if $1 {
+                        enableFaceID()
+                    }
+                }
+            LabeledContent("Версия приложения") {
+                Text("1.0")
+            }
+        }
+    }
+    
+    func DataSection() -> some View {
+        Section("Данные") {
+            Button("Очистить всю историю") {
+                isAlertPresented = true
+            }
+            .foregroundStyle(.red)
+        }
+    }
 }

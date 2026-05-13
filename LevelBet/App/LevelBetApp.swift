@@ -11,21 +11,26 @@ import SwiftData
 @main
 struct LevelBetApp: App {
     
-    private let sharedModelContainer: ModelContainer = {
+    private let sharedModelContainer: ModelContainer
+    private let couponService: CouponService
+    
+    init() {
         do {
-            return try ModelContainer(for: Coupon.self, Event.self)
+            let container = try ModelContainer(for: Coupon.self, Event.self)
+            sharedModelContainer = container
+            couponService = CouponService(
+                context: sharedModelContainer.mainContext)
         } catch {
             fatalError("Could not create ModelContainer: \(error)")
         }
-    }()
+    }
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .preferredColorScheme(.dark)
                 .modelContainer(sharedModelContainer)
-                .environment(
-                    CouponService(context: sharedModelContainer.mainContext))
+                .environment(couponService)
         }
     }
 }

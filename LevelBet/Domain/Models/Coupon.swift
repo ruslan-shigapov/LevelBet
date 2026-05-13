@@ -5,8 +5,8 @@
 //  Created by Ruslan Shigapov on 19.01.2026.
 //
 
-import Foundation
 import SwiftData
+import Foundation
 
 @Model
 final class Coupon {

@@ -8,7 +8,9 @@
 import SwiftData
 import Foundation
 
+// MARK: Data Error
 enum DataError: Error {
+    
     case createFailure, updateFailure, deleteFailure, deleteAllFailure
     
     var description: String {

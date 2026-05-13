@@ -8,6 +8,7 @@
 import SwiftUI
 import LocalAuthentication
 
+// MARK: Tabs
 private enum Tabs: String, CaseIterable, Identifiable {
     
     case results = "Результаты"
@@ -36,11 +37,73 @@ private enum Tabs: String, CaseIterable, Identifiable {
 
 struct ContentView: View {
 
+    // MARK: Private Properties
+    @Environment(\.scenePhase) private var scenePhase
+    
     @AppStorage("isFaceIDEnabled") private var isFaceIDEnabled = false
     
     @State private var selectedTab: Tabs = .profile
+    @State private var isUnlocked = false
     
+    private var shouldAuthenticate: Bool {
+        isFaceIDEnabled && !isUnlocked
+    }
+    
+    // MARK: Body
     var body: some View {
+        MainView()
+            .overlay {
+                if shouldAuthenticate {
+                    LockView()
+                }
+            }
+            .onAppear {
+                if shouldAuthenticate {
+                    authenticate()
+                }
+            }
+            .onChange(of: scenePhase) {
+                if scenePhase != .active && isFaceIDEnabled {
+                    isUnlocked = false
+                }
+            }
+    }
+    
+    // MARK: Private Methods
+    private func authenticate() {
+        let context = LAContext()
+        context.evaluatePolicy(
+            .deviceOwnerAuthenticationWithBiometrics,
+            localizedReason: "Разблокируйте приложение."
+        ) { success, _ in
+            Task { @MainActor in
+                isUnlocked = success
+            }
+        }
+    }
+}
+
+// MARK: - Views
+private extension ContentView {
+    
+    func LockView() -> some View {
+        VStack(spacing: Layouts.standardOffset) {
+            VStack(spacing: Layouts.smallOffset) {
+                Image(systemName: "faceid")
+                    .font(.largeTitle)
+                Text("Приложение под защитой")
+                    .font(.headline)
+            }
+            Button("Разблокировать") {
+                authenticate()
+            }
+            .buttonStyle(.borderedProminent)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.midnight)
+    }
+    
+    func MainView() -> some View {
         TabView(selection: $selectedTab) {
             ForEach(Tabs.allCases) { tab in
                 NavigationStack {
@@ -52,25 +115,7 @@ struct ContentView: View {
                 .tabItem {
                     Label(tab.rawValue, systemImage: tab.imageName)
                 }
-            }
-        }
-        .onAppear {
-            if isFaceIDEnabled {
-                authenticate()
-            }
-        }
-    }
-    
-    private func authenticate() {
-        let context = LAContext()
-        context.evaluatePolicy(
-            .deviceOwnerAuthenticationWithBiometrics,
-            localizedReason: "Разблокируйте приложние."
-        ) { success, _ in
-            Task { @MainActor in
-                if success {
-                    isFaceIDEnabled = true
-                }
+                .tag(tab)
             }
         }
     }
