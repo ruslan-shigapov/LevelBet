@@ -81,12 +81,16 @@ private extension SettingsView {
                         .tag($0.rawValue)
                 }
             }
-            Toggle("Вход по Face ID", isOn: $isFaceIDEnabled)
-                .onChange(of: isFaceIDEnabled) {
-                    if $1 {
-                        enableFaceID()
-                    }
-                }
+            Toggle(
+                "Вход по Face ID",
+                isOn: Binding(
+                    get: { isFaceIDEnabled },
+                    set: {
+                        if $0 {
+                            enableFaceID()
+                        } else {
+                            isFaceIDEnabled = false
+                        }}))
             LabeledContent("Версия приложения") {
                 Text("1.0")
             }

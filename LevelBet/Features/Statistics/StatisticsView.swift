@@ -57,7 +57,9 @@ struct StatisticsView: View {
         }
         .background(Color.lightMidnight)
         .toolbar { toolbarContent }
-        .sheet(isPresented: $isInfoPresented) {}
+        .sheet(isPresented: $isInfoPresented) {
+            InfoView()
+        }
         .sheet(isPresented: $isROIViewPresented) {
             ModalMetricView(
                 title: "Детальный ROI",

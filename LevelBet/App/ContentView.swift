@@ -7,6 +7,7 @@
 
 import SwiftUI
 import LocalAuthentication
+import SwiftData
 
 // MARK: Tabs
 private enum Tabs: String, CaseIterable, Identifiable {
@@ -42,7 +43,7 @@ struct ContentView: View {
     
     @AppStorage("isFaceIDEnabled") private var isFaceIDEnabled = false
     
-    @State private var selectedTab: Tabs = .profile
+    @State private var selectedTab: Tabs = .results
     @State private var isUnlocked = false
     
     private var shouldAuthenticate: Bool {
@@ -119,4 +120,11 @@ private extension ContentView {
             }
         }
     }
+}
+
+#Preview {
+    let container = try! ModelContainer(for: Coupon.self, Event.self)
+    ContentView()
+        .modelContainer(container)
+        .environment(CouponService(context: container.mainContext))
 }

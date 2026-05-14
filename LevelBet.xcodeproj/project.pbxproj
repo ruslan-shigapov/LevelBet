@@ -35,6 +35,8 @@
 		E49F88B42F28BDAF002F0C6B /* CouponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49F88B32F28BDAF002F0C6B /* CouponView.swift */; };
 		E49F88B62F28BDE9002F0C6B /* CouponEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49F88B52F28BDE9002F0C6B /* CouponEditorView.swift */; };
 		E49F88B92F28BE3E002F0C6B /* ToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49F88B82F28BE3E002F0C6B /* ToolbarButton.swift */; };
+		E4A130782FB5DB8600D05C8F /* CuriousSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A130772FB5DB8600D05C8F /* CuriousSectionView.swift */; };
+		E4A1307A2FB5DD4100D05C8F /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A130792FB5DD4100D05C8F /* InfoView.swift */; };
 		E4A6869F2F7A920300598B10 /* EventRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A6869E2F7A920300598B10 /* EventRange.swift */; };
 		E4A8F3732F2785740084311F /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A8F3722F2785740084311F /* Event.swift */; };
 		E4A8F3762F2785AD0084311F /* Sports.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A8F3752F2785AD0084311F /* Sports.swift */; };
@@ -82,6 +84,8 @@
 		E49F88B32F28BDAF002F0C6B /* CouponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponView.swift; sourceTree = "<group>"; };
 		E49F88B52F28BDE9002F0C6B /* CouponEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponEditorView.swift; sourceTree = "<group>"; };
 		E49F88B82F28BE3E002F0C6B /* ToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarButton.swift; sourceTree = "<group>"; };
+		E4A130772FB5DB8600D05C8F /* CuriousSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuriousSectionView.swift; sourceTree = "<group>"; };
+		E4A130792FB5DD4100D05C8F /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		E4A6869E2F7A920300598B10 /* EventRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRange.swift; sourceTree = "<group>"; };
 		E4A8F3722F2785740084311F /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		E4A8F3752F2785AD0084311F /* Sports.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sports.swift; sourceTree = "<group>"; };
@@ -114,6 +118,7 @@
 		E41DB5ED2F6BFB2700DF71F3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E4A130792FB5DD4100D05C8F /* InfoView.swift */,
 				E47549922F826D3800389011 /* SummarySectionView.swift */,
 				E47549942F82701700389011 /* AveragesSectionView.swift */,
 				E41DB5EE2F6BFB5000DF71F3 /* AveragesView.swift */,
@@ -229,6 +234,7 @@
 		E4F47C502FA8A935001845A8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E4A130772FB5DB8600D05C8F /* CuriousSectionView.swift */,
 				E41D22652F9F8E370041456D /* SettingsView.swift */,
 			);
 			path = Views;
@@ -411,6 +417,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4F985652F1E24FE001CB75F /* ContentView.swift in Sources */,
+				E4A130782FB5DB8600D05C8F /* CuriousSectionView.swift in Sources */,
 				E47549A32F8287E800389011 /* LabeledWinRateView.swift in Sources */,
 				E49F88B92F28BE3E002F0C6B /* ToolbarButton.swift in Sources */,
 				E4F985732F1E2592001CB75F /* StatisticsView.swift in Sources */,
@@ -421,6 +428,7 @@
 				E445F4B12F7D3A7600EB889C /* EventOddsRange.swift in Sources */,
 				E40E72DA2F5ECB260072E057 /* ExtraMetricFactory.swift in Sources */,
 				E4F985712F1E2587001CB75F /* ResultsView.swift in Sources */,
+				E4A1307A2FB5DD4100D05C8F /* InfoView.swift in Sources */,
 				E49C114A2F7E82CE0010A53A /* SummaryFactory.swift in Sources */,
 				E4B6F4FD2F864DD100A34F2D /* HighlightsFactory.swift in Sources */,
 				E4B427DF2F76725A008B0300 /* Double+Extension.swift in Sources */,
