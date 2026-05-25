@@ -22,7 +22,7 @@ struct StatisticsView: View {
     
     @ToolbarContentBuilder
     private var toolbarContent: some ToolbarContent {
-        ToolbarItem(placement: .topBarLeading) {
+        ToolbarItem {
             ToolbarButton(type: .info) {
                 isInfoPresented = true
             }

@@ -24,6 +24,7 @@
 		E47549A12F82834300389011 /* ROIListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47549A02F82834300389011 /* ROIListView.swift */; };
 		E47549A32F8287E800389011 /* LabeledWinRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47549A22F8287E800389011 /* LabeledWinRateView.swift */; };
 		E48AE6292F58364B00E5E80E /* FilterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48AE6282F58364B00E5E80E /* FilterFactory.swift */; };
+		E49998ED2FC454BF006BAA26 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49998EC2FC454BF006BAA26 /* OnboardingView.swift */; };
 		E49C114A2F7E82CE0010A53A /* SummaryFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C11492F7E82CE0010A53A /* SummaryFactory.swift */; };
 		E49C114C2F7E85F40010A53A /* AveragesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C114B2F7E85F40010A53A /* AveragesFactory.swift */; };
 		E49F88A42F28BB0F002F0C6B /* CouponService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49F88A32F28BB0F002F0C6B /* CouponService.swift */; };
@@ -73,6 +74,7 @@
 		E47549A02F82834300389011 /* ROIListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ROIListView.swift; sourceTree = "<group>"; };
 		E47549A22F8287E800389011 /* LabeledWinRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledWinRateView.swift; sourceTree = "<group>"; };
 		E48AE6282F58364B00E5E80E /* FilterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterFactory.swift; sourceTree = "<group>"; };
+		E49998EC2FC454BF006BAA26 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		E49C11492F7E82CE0010A53A /* SummaryFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryFactory.swift; sourceTree = "<group>"; };
 		E49C114B2F7E85F40010A53A /* AveragesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AveragesFactory.swift; sourceTree = "<group>"; };
 		E49F88A32F28BB0F002F0C6B /* CouponService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponService.swift; sourceTree = "<group>"; };
@@ -149,6 +151,14 @@
 				E4B6F4FC2F864DD100A34F2D /* HighlightsFactory.swift */,
 			);
 			path = Factories;
+			sourceTree = "<group>";
+		};
+		E49998EB2FC454A5006BAA26 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				E49998EC2FC454BF006BAA26 /* OnboardingView.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		E49F88A52F28BB34002F0C6B /* Services */ = {
@@ -309,6 +319,7 @@
 		E4F9856D2F1E2552001CB75F /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				E49998EB2FC454A5006BAA26 /* Onboarding */,
 				E4F985762F1E259E001CB75F /* Results */,
 				E4F24B992F4DA62F00DC2252 /* CouponEditor */,
 				E4F985772F1E25A6001CB75F /* Statistics */,
@@ -419,6 +430,7 @@
 				E4F985652F1E24FE001CB75F /* ContentView.swift in Sources */,
 				E4A130782FB5DB8600D05C8F /* CuriousSectionView.swift in Sources */,
 				E47549A32F8287E800389011 /* LabeledWinRateView.swift in Sources */,
+				E49998ED2FC454BF006BAA26 /* OnboardingView.swift in Sources */,
 				E49F88B92F28BE3E002F0C6B /* ToolbarButton.swift in Sources */,
 				E4F985732F1E2592001CB75F /* StatisticsView.swift in Sources */,
 				E4A8F3762F2785AD0084311F /* Sports.swift in Sources */,

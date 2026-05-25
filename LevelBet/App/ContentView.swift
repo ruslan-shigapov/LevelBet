@@ -42,6 +42,7 @@ struct ContentView: View {
     @Environment(\.scenePhase) private var scenePhase
     
     @AppStorage("isFaceIDEnabled") private var isFaceIDEnabled = false
+    @AppStorage("isOnboardingShown") private var isOnboardingShown = false
     
     @State private var selectedTab: Tabs = .results
     @State private var isUnlocked = false
@@ -52,22 +53,30 @@ struct ContentView: View {
     
     // MARK: Body
     var body: some View {
-        MainView()
-            .overlay {
-                if shouldAuthenticate {
-                    LockView()
+        Group {
+            if !isOnboardingShown {
+                OnboardingView {
+                    isOnboardingShown = true
                 }
+            } else {
+                MainView()
+                    .overlay {
+                        if shouldAuthenticate {
+                            LockView()
+                        }
+                    }
+                    .onAppear {
+                        if shouldAuthenticate {
+                            authenticate()
+                        }
+                    }
+                    .onChange(of: scenePhase) {
+                        if scenePhase != .active && isFaceIDEnabled {
+                            isUnlocked = false
+                        }
+                    }
             }
-            .onAppear {
-                if shouldAuthenticate {
-                    authenticate()
-                }
-            }
-            .onChange(of: scenePhase) {
-                if scenePhase != .active && isFaceIDEnabled {
-                    isUnlocked = false
-                }
-            }
+        }
     }
     
     // MARK: Private Methods
