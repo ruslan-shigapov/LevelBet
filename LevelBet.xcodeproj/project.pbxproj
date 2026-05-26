@@ -18,6 +18,7 @@
 		E445F4B12F7D3A7600EB889C /* EventOddsRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = E445F4B02F7D3A7600EB889C /* EventOddsRange.swift */; };
 		E44F95802F4EFAC8001B9E72 /* EventSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44F957F2F4EFAC8001B9E72 /* EventSectionView.swift */; };
 		E44F95842F4F03C0001B9E72 /* MainSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44F95832F4F03C0001B9E72 /* MainSectionView.swift */; };
+		E466196B2FC59157005031CD /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E466196A2FC59157005031CD /* OnboardingPage.swift */; };
 		E47549932F826D3800389011 /* SummarySectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47549922F826D3800389011 /* SummarySectionView.swift */; };
 		E47549952F82701700389011 /* AveragesSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47549942F82701700389011 /* AveragesSectionView.swift */; };
 		E475499B2F82812200389011 /* ModalMetricView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E475499A2F82812200389011 /* ModalMetricView.swift */; };
@@ -68,6 +69,7 @@
 		E445F4B02F7D3A7600EB889C /* EventOddsRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventOddsRange.swift; sourceTree = "<group>"; };
 		E44F957F2F4EFAC8001B9E72 /* EventSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSectionView.swift; sourceTree = "<group>"; };
 		E44F95832F4F03C0001B9E72 /* MainSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSectionView.swift; sourceTree = "<group>"; };
+		E466196A2FC59157005031CD /* OnboardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage.swift; sourceTree = "<group>"; };
 		E47549922F826D3800389011 /* SummarySectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarySectionView.swift; sourceTree = "<group>"; };
 		E47549942F82701700389011 /* AveragesSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AveragesSectionView.swift; sourceTree = "<group>"; };
 		E475499A2F82812200389011 /* ModalMetricView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalMetricView.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 		E4A8F3742F2785A00084311F /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				E466196A2FC59157005031CD /* OnboardingPage.swift */,
 				E4A8F3752F2785AD0084311F /* Sports.swift */,
 				E49F88A62F28BBA8002F0C6B /* Statuses.swift */,
 				E49F88A82F28BBBD002F0C6B /* Periods.swift */,
@@ -440,6 +443,7 @@
 				E445F4B12F7D3A7600EB889C /* EventOddsRange.swift in Sources */,
 				E40E72DA2F5ECB260072E057 /* ExtraMetricFactory.swift in Sources */,
 				E4F985712F1E2587001CB75F /* ResultsView.swift in Sources */,
+				E466196B2FC59157005031CD /* OnboardingPage.swift in Sources */,
 				E4A1307A2FB5DD4100D05C8F /* InfoView.swift in Sources */,
 				E49C114A2F7E82CE0010A53A /* SummaryFactory.swift in Sources */,
 				E4B6F4FD2F864DD100A34F2D /* HighlightsFactory.swift in Sources */,
