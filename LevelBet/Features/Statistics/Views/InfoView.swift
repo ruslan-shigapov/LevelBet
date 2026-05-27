@@ -63,7 +63,7 @@ struct InfoView: View {
             Text(title)
                 .font(.body.weight(.medium))
             Text(text)
-                .font(.body.weight(.light).italic())
+                .font(.callout.weight(.light).italic())
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()

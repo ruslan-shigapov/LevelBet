@@ -130,10 +130,3 @@ private extension ContentView {
         }
     }
 }
-
-#Preview {
-    let container = try! ModelContainer(for: Coupon.self, Event.self)
-    ContentView()
-        .modelContainer(container)
-        .environment(CouponService(context: container.mainContext))
-}
