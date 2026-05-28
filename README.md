@@ -21,6 +21,8 @@
 
 **Авторизация:** LocalAuthentication (Face ID)
 
+**Доп. фреймворки:** Charts
+
 <img width="388" alt="Simulator Screenshot - iPhone 14 Plus - 2026-05-28 at 11 05 04" src="https://github.com/user-attachments/assets/5fb59539-ac53-4732-9831-221e9615c27f" />
 
 <img width="388" alt="Simulator Screenshot - iPhone 14 Plus - 2026-05-28 at 11 03 45" src="https://github.com/user-attachments/assets/73bd29f5-3c7c-479b-b751-38b0a33c438d" />
